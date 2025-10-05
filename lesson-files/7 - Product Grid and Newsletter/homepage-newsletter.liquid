@@ -1,0 +1,45 @@
+<!-- NEWSLETTER / STOREFRONT INFO -->
+<section
+  class="py-5"
+  style="background: linear-gradient(90deg, #fff, #fff7fb, #f0fbff)"
+>
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-7">
+        <h3 class="brand fw-black">Join the Sprinkle Letter</h3>
+        <p class="mb-3">
+          Get 10% off your first order + early access to
+          seasonal drops.
+        </p>
+        <form
+          onsubmit="event.preventDefault(); toast('Welcome to the Sprinkle Letter!'); this.reset();"
+        >
+          <div class="input-group input-group-lg" style="max-width: 520px">
+            <span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
+            <input
+              type="email"
+              required
+              class="form-control"
+              placeholder="you@sweetmail.com"
+            />
+            <button class="btn btn-dark" type="submit">
+              Subscribe
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-5" id="visit">
+        <div class="p-4 border rounded-4 bg-white">
+          <h6 class="text-uppercase text-secondary">
+            Visit our shop
+          </h6>
+          <p class="mb-1">123 Sprinkle Lane, Sweet City</p>
+          <p class="mb-3">Open daily 9am – 7pm</p>
+          <a class="btn btn-outline-dark btn-sm" href="#"
+          ><i class="bi bi-geo-alt"></i> Get directions</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

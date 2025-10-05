@@ -1,0 +1,149 @@
+{{ 'main-cart-items.css' | asset_url | stylesheet_tag }}
+
+<!-- Header -->
+<header class="pt-4 pb-2">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb small mb-2">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Cart</li>
+      </ol>
+    </nav>
+    <div
+      class="d-flex justify-content-between align-items-end flex-wrap gap-2"
+    >
+      <div>
+        <h1 class="brand fw-black m-0">Your cart</h1>
+        <p class="text-secondary mb-0">
+          <span id="itemCount">0</span> items
+        </p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="pb-5">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Left: items -->
+      <div class="col-lg-8">
+        <div class="cart-card p-3 p-md-4">
+          {% if cart.item_count == 0 %}
+            <div id="emptyState" class="text-center py-5">
+              <div class="display-6">🧁</div>
+              <h5 class="brand fw-black">Your cart is empty</h5>
+              <p class="text-secondary">Let’s fix that. Explore favorites and limited drops.</p>
+              <a class="btn btn-dark" href="{{ routes.all_products_collection_url }}">
+                <i class="bi bi-bag-heart me-1"></i> Start shopping
+              </a>
+            </div>
+          {% else %}
+            <div id="itemList" class="vstack gap-3">
+              {% for item in cart.items %}
+                <div class="line-item d-flex gap-3 align-items-start">
+                  <img
+                    src="{{ item.image | image_url: width: 160, height: 110, crop: 'center' }}"
+                    alt="{{ item.product.title | escape }}"
+                    class="thumb"
+                  >
+                  <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div>
+                        <div class="fw-semibold">{{ item.product.title }}</div>
+                        <div class="small text-secondary">{{ item.variant.title }}</div>
+                      </div>
+                      <a
+                        class="btn btn-sm btn-outline-danger"
+                        href="{{ item.url_to_remove }}"
+                      >
+                        <i class="bi bi-x"></i>
+                      </a>
+                    </div>
+
+                    <div class="d-flex flex-wrap align-items-center gap-3 mt-2">
+                      <div class="input-group qty" style="width:140px">
+                        <button
+                          class="btn btn-outline-secondary"
+                          type="button"
+                          aria-label="Decrease quantity"
+                          onclick="var i=this.nextElementSibling; i.stepDown(); i.onchange()"
+                        >
+                          <i class="bi bi-dash"></i>
+                        </button>
+
+                        <input
+                          id="qty-{{ forloop.index }}"
+                          type="number"
+                          class="form-control text-center"
+                          min="0"
+                          step="1"
+                          value="{{ item.quantity }}"
+                          onchange="location.href='/cart/change?line={{ forloop.index }}&quantity='+this.value"
+                        />
+
+                        <button
+                          class="btn btn-outline-secondary"
+                          type="button"
+                          aria-label="Increase quantity"
+                          onclick="var i=this.previousElementSibling; i.stepUp(); i.onchange()"
+                        >
+                          <i class="bi bi-plus"></i>
+                        </button>
+                      </div>
+                      <div class="ms-auto fw-semibold">
+                        {{ item.final_line_price | money }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Right: summary -->
+      <div class="col-lg-4">
+        <div class="cart-card p-3 p-md-4 summary-card">
+          <h6 class="mb-3">Order summary</h6>
+
+          <div class="d-flex justify-content-between mb-1 small">
+            <span>Subtotal</span>
+            <span id="sumSubtotal">{{ cart.items_subtotal_price | money }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-1 small">
+            <span>Discounts</span>
+            <span id="sumDiscounts">-{{ cart.total_discounts | money }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-1 small">
+            <span>Tax</span><span>Calculated at checkout</span>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between fs-5 fw-semibold">
+            <span>Total</span>
+            <span id="sumTotal">{{ cart.total_price | money }}</span>
+          </div>
+
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" id="agree" checked>
+            <label class="form-check-label small" for="agree">
+              I agree to the <a href="/policies/terms-of-service">Terms</a> and
+              <a href="/policies/privacy-policy">Privacy</a>.
+            </label>
+          </div>
+
+          <div class="d-grid gap-2 mt-3">
+            <form action="/cart" method="post">
+              <button class="btn btn-dark btn-lg" id="checkout" name="checkout">
+                <i class="bi bi-credit-card"></i> Checkout
+              </button>
+            </form>
+            <a class="btn btn-outline-dark" href="{{ routes.all_products_collection_url }}">
+              <i class="bi bi-arrow-left"></i> Continue shopping
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,115 @@
+:root {
+  --grape: #7e57c2;
+  --bubble: #f48fb1;
+  --mint: #2dd4bf;
+  --lemon: #fcd34d;
+  --sky: #60a5fa;
+  --ink: #0f172a;
+  --cream: #fffaf6;
+}
+body {
+  background: linear-gradient(180deg, #fff 0%, #fff5fb 35%, #f0fbff 100%);
+  color: var(--ink);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+.brand {
+  font-family: Grandstander, system-ui, sans-serif;
+}
+.navbar {
+  backdrop-filter: saturate(130%) blur(6px);
+}
+.nav-link {
+  position: relative;
+}
+.nav-link:after {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  bottom: 0.25rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--bubble), var(--mint));
+  border-radius: 99px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-link:hover:after,
+.nav-link.active:after {
+  transform: scaleX(1);
+}
+
+.promo {
+  background: linear-gradient(
+    90deg,
+    var(--bubble),
+    var(--sky),
+    var(--mint)
+  );
+  color: #0b2a2d;
+}
+
+.cart-card {
+  border: 0;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+.line-item + .line-item {
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+.qty .btn {
+  width: 38px;
+}
+.thumb {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.pill {
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.summary-card {
+  position: sticky;
+  top: 88px;
+}
+.freebar {
+  height: 8px;
+  background: #eef2ff;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.freebar > div {
+  height: 100%;
+  background: linear-gradient(90deg, var(--lemon), var(--mint));
+}
+
+.footer {
+  background: #0b1220;
+  color: #cbd5e1;
+}
+.footer a {
+  color: #fbcfe8;
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 991.98px) {
+  .thumb {
+    width: 82px;
+    height: 82px;
+  }
+}

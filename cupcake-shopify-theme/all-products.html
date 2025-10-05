@@ -1,0 +1,1587 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cupcake Cloud — All Cupcakes</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@500;700;900&family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --grape: #7e57c2;
+        --bubble: #f48fb1;
+        --mint: #2dd4bf;
+        --lemon: #fcd34d;
+        --sky: #60a5fa;
+        --ink: #0f172a;
+        --cream: #fffaf6;
+      }
+      body {
+        background: linear-gradient(180deg, #fff 0%, #fff5fb 35%, #f0fbff 100%);
+        color: var(--ink);
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      .brand {
+        font-family: Grandstander, system-ui, sans-serif;
+      }
+
+      /* Navbar */
+      .navbar {
+        backdrop-filter: saturate(130%) blur(6px);
+      }
+      .nav-link {
+        position: relative;
+      }
+      .nav-link:after {
+        content: "";
+        position: absolute;
+        left: 0.6rem;
+        right: 0.6rem;
+        bottom: 0.25rem;
+        height: 3px;
+        background: linear-gradient(90deg, var(--bubble), var(--mint));
+        border-radius: 99px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+      }
+      .nav-link:hover:after,
+      .nav-link.active:after {
+        transform: scaleX(1);
+      }
+
+      /* Page */
+      .page-hero {
+        background:
+          radial-gradient(
+            600px 200px at 10% -20%,
+            rgba(244, 143, 177, 0.35) 0,
+            transparent 60%
+          ),
+          radial-gradient(
+            600px 200px at 110% 10%,
+            rgba(96, 165, 250, 0.35) 0,
+            transparent 60%
+          ),
+          linear-gradient(135deg, #fff 0%, #fffaf6 60%, #f0fbff 100%);
+      }
+      .pill {
+        border-radius: 999px;
+        font-weight: 600;
+      }
+
+      /* Filters */
+      .filter-card {
+        border: 0;
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      }
+      .sticky-side {
+        position: sticky;
+        top: 88px;
+      }
+      .active-chip {
+        border-radius: 999px;
+        background: #0f172a;
+        color: #fff;
+        padding: 0.35rem 0.7rem;
+      }
+      .active-chip button {
+        border: 0;
+        background: transparent;
+        color: #fff;
+      }
+
+      /* Product */
+      .card-product {
+        border: 0;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      .card-product:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+      }
+      .thumb {
+        aspect-ratio: 4/3;
+        object-fit: cover;
+      }
+
+      .badge-new {
+        background: linear-gradient(90deg, var(--lemon), var(--mint));
+        color: #0b2a2d;
+      }
+      .badge-top {
+        background: linear-gradient(90deg, var(--grape), var(--bubble));
+      }
+      .wishlist {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+
+      .footer {
+        background: #0b1220;
+        color: #cbd5e1;
+      }
+      .footer a {
+        color: #fbcfe8;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        text-decoration: underline;
+      }
+
+      .promo {
+        background: linear-gradient(
+          90deg,
+          var(--bubble),
+          var(--sky),
+          var(--mint)
+        );
+        color: #0b2a2d;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Promo -->
+    <div class="promo py-2 text-center small">
+      <div class="container">
+        <i class="bi bi-stars"></i> New fall flavors just dropped — try
+        <strong>Pumpkin Cream Cloud</strong>! 🎃
+      </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-white sticky-top border-bottom py-3">
+      <div class="container">
+        <a class="navbar-brand brand d-flex align-items-center" href="#">
+          <span class="me-2" aria-hidden="true">
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 64 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="32" cy="20" r="10" fill="url(#g1)" />
+              <path
+                d="M10 34h44l-6 18a4 4 0 0 1-3.8 2.7H19.8A4 4 0 0 1 16 52l-6-18Z"
+                fill="url(#g2)"
+              />
+              <defs>
+                <linearGradient
+                  id="g1"
+                  x1="22"
+                  y1="10"
+                  x2="42"
+                  y2="30"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#F48FB1" />
+                  <stop offset="1" stop-color="#60A5FA" />
+                </linearGradient>
+                <linearGradient
+                  id="g2"
+                  x1="10"
+                  y1="34"
+                  x2="54"
+                  y2="52"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FCD34D" />
+                  <stop offset="1" stop-color="#2DD4BF" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <span class="fs-3">Cupcake Cloud</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#nav"
+          aria-controls="nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="collections.html">Collections</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="all-products.html">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#flavorModal"
+              >
+                Flavor of the Week
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+          <div class="d-flex ms-lg-3 gap-2 align-items-center">
+            <!-- Auth: Sign in button (shown when logged out) -->
+            <button
+              class="btn btn-outline-secondary"
+              id="btnSignIn"
+              data-bs-toggle="modal"
+              data-bs-target="#authModal"
+            >
+              <i class="bi bi-person"></i> Sign in
+            </button>
+
+            <!-- Auth: Register button (shown when logged out) -->
+            <a class="btn btn-dark" id="btnRegister" href="register.html">
+              <i class="bi bi-person-plus"></i> Register
+            </a>
+
+            <!-- Auth: user dropdown (shown when logged in) -->
+            <div class="dropdown d-none" id="userMenu">
+              <button
+                class="btn btn-outline-secondary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-person-circle"></i>
+                <span id="navUserName">Account</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" href="account.html"
+                    ><i class="bi bi-person"></i> Account</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="orders.html"
+                    ><i class="bi bi-receipt"></i> Orders</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <button class="dropdown-item text-danger" id="btnLogout">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Log out
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Existing cart / order buttons -->
+            <a class="btn btn-outline-dark" href="cart.html">
+              <i class="bi bi-bag"></i> Cart
+              <span class="badge text-bg-danger ms-1" id="cartCount">0</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero / Controls -->
+    <header class="page-hero py-4 border-bottom">
+      <div class="container">
+        <div
+          class="d-flex flex-wrap align-items-end justify-content-between gap-3"
+        >
+          <div>
+            <h1 class="brand fw-black m-0">All Cupcakes</h1>
+            <small class="text-secondary"
+              ><span id="resultCount">0</span> results</small
+            >
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <div class="input-group" style="min-width: 220px">
+              <span class="input-group-text bg-white"
+                ><i class="bi bi-sort-down"></i
+              ></span>
+              <select id="sort" class="form-select">
+                <option value="featured">Featured</option>
+                <option value="newest">Newest</option>
+                <option value="rating">Top rated</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="activeChips" class="d-flex flex-wrap gap-2 mt-3"></div>
+      </div>
+    </header>
+
+    <main class="py-4">
+      <div class="container">
+        <div class="row g-4">
+          <!-- Sidebar (desktop) / Offcanvas (mobile) -->
+          <aside class="col-lg-3">
+            <div
+              class="offcanvas-lg offcanvas-start"
+              tabindex="-1"
+              id="filters"
+              aria-labelledby="filtersLabel"
+            >
+              <div class="offcanvas-header">
+                <h5 id="filtersLabel" class="brand fw-black m-0">Filters</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="offcanvas-body p-0 p-lg-0">
+                <div class="filter-card p-3 p-md-4 sticky-side">
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-2"
+                  >
+                    <h6 class="m-0">Categories</h6>
+                    <button class="btn btn-sm btn-link" id="clearAll">
+                      Clear all
+                    </button>
+                  </div>
+                  <div class="vstack gap-2 mb-3" id="catWrap">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input cat"
+                        type="checkbox"
+                        id="cClassic"
+                        value="Classic"
+                      /><label class="form-check-label" for="cClassic"
+                        >Classic</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input cat"
+                        type="checkbox"
+                        id="cFruity"
+                        value="Fruity"
+                      /><label class="form-check-label" for="cFruity"
+                        >Fruity</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input cat"
+                        type="checkbox"
+                        id="cChocolate"
+                        value="Chocolate"
+                      /><label class="form-check-label" for="cChocolate"
+                        >Chocolate</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input cat"
+                        type="checkbox"
+                        id="cSpecialty"
+                        value="Specialty"
+                      /><label class="form-check-label" for="cSpecialty"
+                        >Specialty</label
+                      >
+                    </div>
+                  </div>
+
+                  <h6 class="mt-2">Tags</h6>
+                  <div class="row g-2 mb-3">
+                    <div class="col-6">
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input diet"
+                          type="checkbox"
+                          id="dVegan"
+                          value="vegan"
+                        /><label class="form-check-label" for="dVegan"
+                          >Vegan</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input diet"
+                          type="checkbox"
+                          id="dGF"
+                          value="gf"
+                        /><label class="form-check-label" for="dGF"
+                          >Gluten‑free</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input diet"
+                          type="checkbox"
+                          id="dNF"
+                          value="nutfree"
+                        /><label class="form-check-label" for="dNF"
+                          >Nut‑free</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <h6 class="mt-2">Price</h6>
+                  <div class="row g-2 align-items-center mb-3">
+                    <div class="col">
+                      <input
+                        id="minPrice"
+                        type="number"
+                        min="0"
+                        step="0.25"
+                        class="form-control"
+                        placeholder="Min"
+                      />
+                    </div>
+                    <div class="col-auto">—</div>
+                    <div class="col">
+                      <input
+                        id="maxPrice"
+                        type="number"
+                        min="0"
+                        step="0.25"
+                        class="form-control"
+                        placeholder="Max"
+                      />
+                    </div>
+                  </div>
+
+                  <h6 class="mt-2">Rating</h6>
+                  <div
+                    class="btn-group w-100 mb-3"
+                    role="group"
+                    aria-label="Min rating"
+                  >
+                    <input
+                      type="radio"
+                      class="btn-check rating"
+                      name="rating"
+                      id="r0"
+                      value="0"
+                      checked
+                    />
+                    <label class="btn btn-outline-dark" for="r0">Any</label>
+                    <input
+                      type="radio"
+                      class="btn-check rating"
+                      name="rating"
+                      id="r4"
+                      value="4"
+                    />
+                    <label class="btn btn-outline-dark" for="r4">4★+</label>
+                    <input
+                      type="radio"
+                      class="btn-check rating"
+                      name="rating"
+                      id="r4_5"
+                      value="4.5"
+                    />
+                    <label class="btn btn-outline-dark" for="r4_5">4.5★+</label>
+                  </div>
+
+                  <h6 class="mt-2">Badges</h6>
+                  <div class="vstack gap-2 mb-2">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input badgef"
+                        type="checkbox"
+                        id="bNew"
+                        value="New"
+                      /><label class="form-check-label" for="bNew">New</label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input badgef"
+                        type="checkbox"
+                        id="bTop"
+                        value="Top Rated"
+                      /><label class="form-check-label" for="bTop"
+                        >Top Rated</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input badgef"
+                        type="checkbox"
+                        id="bLimited"
+                        value="Limited"
+                      /><label class="form-check-label" for="bLimited"
+                        >Limited</label
+                      >
+                    </div>
+                  </div>
+
+                  <div class="d-grid mt-2">
+                    <button class="btn btn-dark" data-bs-dismiss="offcanvas">
+                      <i class="bi bi-check2"></i> Apply filters
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Results -->
+          <section class="col-lg-9">
+            <div id="grid" class="row g-4"></div>
+            <div id="empty" class="text-center py-5 d-none">
+              <div class="display-6">🧁</div>
+              <h5 class="brand fw-black">No cupcakes match your filters</h5>
+              <p class="text-secondary">
+                Try removing a filter or broadening your search.
+              </p>
+              <button id="resetFilters" class="btn btn-outline-dark">
+                <i class="bi bi-sliders"></i> Reset filters
+              </button>
+            </div>
+            <div class="text-center mt-4">
+              <button id="loadMore" class="btn btn-outline-dark btn-lg">
+                <i class="bi bi-plus-circle"></i> Load more
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- FLAVOR OF THE WEEK MODAL -->
+    <div
+      class="modal fade"
+      id="flavorModal"
+      tabindex="-1"
+      aria-labelledby="flavorModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="flavorModalLabel" class="modal-title brand fw-black">
+              Flavor of the Week
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="row g-4 align-items-center">
+              <div class="col-lg-6">
+                <img
+                  class="img-fluid rounded-4 shadow"
+                  src="https://placehold.co/900x560/fef3c7/0b1220?text=Flavor+of+the+Week:+Mango+Sunrise"
+                  alt="Flavor of the Week"
+                />
+              </div>
+              <div class="col-lg-6">
+                <h2 class="brand fw-black">
+                  Flavor of the Week: Mango Sunrise
+                </h2>
+                <p>
+                  Vanilla-mango marble cake with passionfruit curd and mango
+                  buttercream. Tropical sunshine in a bite.
+                </p>
+
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <span class="badge text-bg-warning">Limited</span>
+                  <span class="badge text-bg-info">Tropical</span>
+                </div>
+
+                <div class="p-3 border rounded-4 bg-white">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <strong>Ends in</strong>
+                    <div class="countdown h5 m-0" id="countdown">
+                      03d 00h 00m 00s
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex gap-3 mt-3">
+                  <button
+                    class="btn btn-dark add"
+                    data-name="Mango Sunrise (FOTW)"
+                    data-price="4.50"
+                  >
+                    <i class="bi bi-bag-plus"></i> Add to cart
+                  </button>
+                  <button
+                    class="btn btn-outline-dark"
+                    data-bs-dismiss="modal"
+                    onclick="scrollToShop()"
+                  >
+                    <i class="bi bi-bag"></i> See all flavors
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <small class="text-secondary"
+              >Limited-time drop — available while supplies last.</small
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div
+      class="position-fixed bottom-0 start-50 translate-middle-x p-3"
+      style="z-index: 1080"
+    >
+      <div
+        id="liveToast"
+        class="toast align-items-center text-white bg-dark border-0"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body" id="toastMsg">Added to cart!</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD-TO-CART MODAL -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0">
+          <div class="modal-header border-0">
+            <h5 class="modal-title">
+              <i class="bi bi-bag-plus me-1"></i> Add to cart
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body pt-0">
+            <div class="d-flex gap-3 align-items-start">
+              <img
+                id="addImg"
+                src=""
+                alt=""
+                class="rounded"
+                width="96"
+                height="96"
+                style="object-fit: cover"
+              />
+              <div class="flex-grow-1">
+                <div id="addName" class="fw-semibold">Product Name</div>
+                <div class="small text-secondary">Price</div>
+                <p
+                  id="addDescription"
+                  class="card-text small text-secondary mb-2"
+                >
+                  Product Description
+                </p>
+                <div id="addPrice" class="h5 m-0">$0.00</div>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <label for="addQty" class="form-label small text-secondary"
+                >Quantity</label
+              >
+              <input
+                id="addQty"
+                type="number"
+                class="form-control"
+                min="1"
+                step="1"
+                value="1"
+              />
+            </div>
+          </div>
+
+          <div class="modal-footer border-0">
+            <button class="btn btn-outline-dark" data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button class="btn btn-dark" id="confirmAdd">
+              <i class="bi bi-bag-plus"></i> Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ADD-TO-CART MODAL -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0">
+          <div class="modal-header border-0">
+            <h5 class="modal-title">
+              <i class="bi bi-bag-plus me-1"></i> Add to cart
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body pt-0">
+            <div class="d-flex gap-3 align-items-start">
+              <img
+                id="addImg"
+                src=""
+                alt=""
+                class="rounded"
+                width="96"
+                height="96"
+                style="object-fit: cover"
+              />
+              <div class="flex-grow-1">
+                <div id="addName" class="fw-semibold">Product Name</div>
+                <div class="small text-secondary">Price</div>
+                <p
+                  id="addDescription"
+                  class="card-text small text-secondary mb-2"
+                >
+                  Product Description
+                </p>
+                <div id="addPrice" class="h5 m-0">$0.00</div>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <label for="addQty" class="form-label small text-secondary"
+                >Quantity</label
+              >
+              <input
+                id="addQty"
+                type="number"
+                class="form-control"
+                min="1"
+                step="1"
+                value="1"
+              />
+            </div>
+          </div>
+
+          <div class="modal-footer border-0">
+            <button class="btn btn-outline-dark" data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button class="btn btn-dark" id="confirmAdd">
+              <i class="bi bi-bag-plus"></i> Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer pt-5 pb-4 mt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="brand fs-3 mb-2">Cupcake Cloud</div>
+            <p class="text-light">
+              Small‑batch bakery crafting colorful cupcakes since 2012.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" aria-label="Instagram"
+                ><i class="bi bi-instagram fs-4"></i
+              ></a>
+              <a href="#" aria-label="TikTok"
+                ><i class="bi bi-tiktok fs-4"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="bi bi-facebook fs-4"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <h6 class="text-uppercase text-secondary">Shop</h6>
+            <ul class="list-unstyled small">
+              <li>
+                <a href="all-products.html">All Cupcakes</a>
+              </li>
+              <li><a href="collections.html">Collections</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-2">
+            <h6 class="text-uppercase text-secondary">Help</h6>
+            <ul class="list-unstyled small">
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6 class="text-uppercase text-secondary">Guarantee</h6>
+            <p class="small">
+              If you don’t love it, we’ll make it right. That’s our
+              Sprinkle‑Happy Guarantee.
+            </p>
+          </div>
+        </div>
+        <hr class="border-secondary border-opacity-25 my-4" />
+        <div
+          class="d-flex flex-wrap justify-content-between small text-secondary"
+        >
+          <span>© <span id="year"></span> Cupcake Cloud</span>
+          <div class="d-flex gap-3">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const fmt = (n) => `$${(Math.round(n * 100) / 100).toFixed(2)}`;
+      let t;
+      function toast(msg) {
+        const el = document.getElementById("liveToast");
+        document.getElementById("toastMsg").textContent = msg;
+        (t || (t = new bootstrap.Toast(el, { delay: 1800 }))).show();
+      }
+
+      // --- Demo catalog ---
+      const catalog = [
+        {
+          id: "van",
+          name: "Vanilla Confetti",
+          price: 3.5,
+          category: "Classic",
+          rating: 4.7,
+          badges: ["Top Rated"],
+          diet: { vegan: false, gf: false, nutfree: true },
+          createdAt: "2025-05-01",
+          img: "https://placehold.co/800x540/ffd1e7/0b1220?text=Vanilla+Confetti",
+        },
+        {
+          id: "rv",
+          name: "Red Velvet Classic",
+          price: 3.95,
+          category: "Classic",
+          rating: 4.6,
+          badges: [],
+          diet: { vegan: false, gf: false, nutfree: true },
+          createdAt: "2024-12-01",
+          img: "https://placehold.co/800x540/fccde2/0b1220?text=Red+Velvet+Classic",
+        },
+        {
+          id: "key",
+          name: "Key Lime Pie",
+          price: 3.75,
+          category: "Fruity",
+          rating: 4.8,
+          badges: ["Top Rated"],
+          diet: { vegan: false, gf: false, nutfree: true },
+          createdAt: "2025-03-03",
+          img: "https://placehold.co/800x540/c4f2e8/0b1220?text=Key+Lime+Pie",
+        },
+        {
+          id: "mch",
+          name: "Matcha Honey Harmony",
+          price: 4.25,
+          category: "Specialty",
+          rating: 4.5,
+          badges: ["Limited"],
+          diet: { vegan: false, gf: false, nutfree: true },
+          createdAt: "2025-07-10",
+          img: "https://placehold.co/800x540/cffafe/0b1220?text=Matcha+Honey+Harmony",
+        },
+        {
+          id: "mocha",
+          name: "Mocha Latte Buzz",
+          price: 3.95,
+          category: "Chocolate",
+          rating: 4.6,
+          badges: [],
+          diet: { vegan: false, gf: false, nutfree: true },
+          createdAt: "2025-01-20",
+          img: "https://placehold.co/800x540/ded3ff/0b1220?text=Mocha+Latte+Buzz",
+        },
+        {
+          id: "churro",
+          name: "Churro Cinnamon Swirl",
+          price: 3.85,
+          category: "Chocolate",
+          rating: 4.4,
+          badges: [],
+          diet: { vegan: false, gf: false, nutfree: false },
+          createdAt: "2024-11-05",
+          img: "https://placehold.co/800x540/ffe3b3/0b1220?text=Churro+Cinnamon+Swirl",
+        },
+        {
+          id: "straw",
+          name: "Strawberry Shortcake",
+          price: 3.95,
+          category: "Fruity",
+          rating: 4.7,
+          badges: ["Top Rated"],
+          diet: { vegan: false, gf: false, nutfree: true },
+          createdAt: "2025-04-12",
+          img: "https://placehold.co/800x540/ffd1dc/0b1220?text=Strawberry+Shortcake",
+        },
+        {
+          id: "pret",
+          name: "Salted Caramel Pretzel",
+          price: 4.25,
+          category: "Specialty",
+          rating: 4.6,
+          badges: ["Limited"],
+          diet: { vegan: false, gf: false, nutfree: false },
+          createdAt: "2025-06-18",
+          img: "https://placehold.co/800x540/dff7ff/0b1220?text=Salted+Caramel+Pretzel",
+        },
+        {
+          id: "mango",
+          name: "Mango Sunrise",
+          price: 4.15,
+          category: "Fruity",
+          rating: 4.6,
+          badges: ["New"],
+          diet: { vegan: false, gf: false, nutfree: true },
+          createdAt: "2025-08-15",
+          img: "https://placehold.co/800x540/ffd9a8/0b1220?text=Mango+Sunrise",
+        },
+        {
+          id: "bb",
+          name: "Blueberry Burst",
+          price: 3.8,
+          category: "Fruity",
+          rating: 4.5,
+          badges: [],
+          diet: { vegan: false, gf: true, nutfree: true },
+          createdAt: "2025-02-02",
+          img: "https://placehold.co/800x540/c9e6ff/0b1220?text=Blueberry+Burst",
+        },
+        {
+          id: "mint",
+          name: "Midnight Mint",
+          price: 4.05,
+          category: "Chocolate",
+          rating: 4.3,
+          badges: ["New"],
+          diet: { vegan: true, gf: false, nutfree: true },
+          createdAt: "2025-08-10",
+          img: "https://placehold.co/800x540/d6ffed/0b1220?text=Midnight+Mint+(Vegan)",
+        },
+        {
+          id: "oreo",
+          name: "Cookies & Dream",
+          price: 4.05,
+          category: "Chocolate",
+          rating: 4.4,
+          badges: [],
+          diet: { vegan: false, gf: false, nutfree: false },
+          createdAt: "2025-03-21",
+          img: "https://placehold.co/800x540/e8e8ff/0b1220?text=Cookies+%26+Dream",
+        },
+        {
+          id: "pb",
+          name: "Peanut Butter Cloud",
+          price: 4.15,
+          category: "Specialty",
+          rating: 4.6,
+          badges: [],
+          diet: { vegan: false, gf: false, nutfree: false },
+          createdAt: "2025-05-12",
+          img: "https://placehold.co/800x540/ffe4cf/0b1220?text=Peanut+Butter+Cloud",
+        },
+        {
+          id: "lem",
+          name: "Lemon Zest Pop",
+          price: 3.7,
+          category: "Fruity",
+          rating: 4.2,
+          badges: [],
+          diet: { vegan: false, gf: true, nutfree: true },
+          createdAt: "2025-01-05",
+          img: "https://placehold.co/800x540/fff3b0/0b1220?text=Lemon+Zest+Pop",
+        },
+        {
+          id: "car",
+          name: "Carrot Cake Cozy",
+          price: 3.9,
+          category: "Classic",
+          rating: 4.5,
+          badges: [],
+          diet: { vegan: false, gf: false, nutfree: true },
+          createdAt: "2024-10-25",
+          img: "https://placehold.co/800x540/ffe8cc/0b1220?text=Carrot+Cake+Cozy",
+        },
+        {
+          id: "smr",
+          name: "S’mores Night",
+          price: 4.1,
+          category: "Chocolate",
+          rating: 4.7,
+          badges: ["Top Rated"],
+          diet: { vegan: false, gf: false, nutfree: false },
+          createdAt: "2025-07-04",
+          img: "https://placehold.co/800x540/ffe5d6/0b1220?text=S%E2%80%99mores+Night",
+        },
+        {
+          id: "pist",
+          name: "Pistachio Rose",
+          price: 4.3,
+          category: "Specialty",
+          rating: 4.5,
+          badges: ["Limited", "Top Rated"],
+          diet: { vegan: false, gf: false, nutfree: false },
+          createdAt: "2025-05-25",
+          img: "https://placehold.co/800x540/e7ffef/0b1220?text=Pistachio+Rose",
+        },
+        {
+          id: "ban",
+          name: "Banana Cream Puff",
+          price: 3.85,
+          category: "Classic",
+          rating: 4.1,
+          badges: [],
+          diet: { vegan: false, gf: false, nutfree: true },
+          createdAt: "2024-09-12",
+          img: "https://placehold.co/800x540/fff1d6/0b1220?text=Banana+Cream+Puff",
+        },
+        {
+          id: "rasp",
+          name: "Raspberry Ripple",
+          price: 3.95,
+          category: "Fruity",
+          rating: 4.6,
+          badges: ["New"],
+          diet: { vegan: false, gf: false, nutfree: true },
+          createdAt: "2025-08-05",
+          img: "https://placehold.co/800x540/ffd0e1/0b1220?text=Raspberry+Ripple",
+        },
+        {
+          id: "cocoa",
+          name: "Cocoa Cloud",
+          price: 3.6,
+          category: "Chocolate",
+          rating: 4.0,
+          badges: [],
+          diet: { vegan: false, gf: true, nutfree: true },
+          createdAt: "2025-02-22",
+          img: "https://placehold.co/800x540/dfd3ff/0b1220?text=Cocoa+Cloud+(GF)",
+        },
+        {
+          id: "map",
+          name: "Maple Walnut Whirl",
+          price: 4.2,
+          category: "Specialty",
+          rating: 4.3,
+          badges: [],
+          diet: { vegan: false, gf: false, nutfree: false },
+          createdAt: "2024-11-30",
+          img: "https://placehold.co/800x540/fff1e0/0b1220?text=Maple+Walnut+Whirl",
+        },
+        {
+          id: "cool",
+          name: "Cool Lime Coconut",
+          price: 4.05,
+          category: "Specialty",
+          rating: 4.4,
+          badges: [],
+          diet: { vegan: true, gf: false, nutfree: true },
+          createdAt: "2025-06-02",
+          img: "https://placehold.co/800x540/e4fff6/0b1220?text=Cool+Lime+Coconut+(Vegan)",
+        },
+        {
+          id: "chai",
+          name: "Chai Spice Latte",
+          price: 4.0,
+          category: "Specialty",
+          rating: 4.5,
+          badges: ["New"],
+          diet: { vegan: false, gf: false, nutfree: true },
+          createdAt: "2025-08-20",
+          img: "https://placehold.co/800x540/fbe7ff/0b1220?text=Chai+Spice+Latte",
+        },
+        {
+          id: "pump",
+          name: "Pumpkin Cream Cloud",
+          price: 4.1,
+          category: "Classic",
+          rating: 4.6,
+          badges: ["New", "Limited"],
+          diet: { vegan: false, gf: false, nutfree: true },
+          createdAt: "2025-08-18",
+          img: "https://placehold.co/800x540/ffe3c7/0b1220?text=Pumpkin+Cream+Cloud",
+        },
+      ];
+
+      // --- State ---
+      const state = {
+        q: "",
+        cats: new Set(),
+        diet: { vegan: false, gf: false, nutfree: false },
+        price: { min: null, max: null },
+        rating: 0,
+        badges: new Set(),
+        sort: "featured",
+        view: "grid",
+        page: 1,
+        perPage: 12,
+      };
+
+      // Elements
+      const el = {
+        q: document.getElementById("q"),
+        sort: document.getElementById("sort"),
+        minPrice: document.getElementById("minPrice"),
+        maxPrice: document.getElementById("maxPrice"),
+        grid: document.getElementById("grid"),
+        empty: document.getElementById("empty"),
+        resultCount: document.getElementById("resultCount"),
+        loadMore: document.getElementById("loadMore"),
+        activeChips: document.getElementById("activeChips"),
+        viewGrid: document.getElementById("viewGrid"),
+        viewList: document.getElementById("viewList"),
+      };
+
+      // Bind controls
+      document.querySelectorAll(".cat").forEach((c) =>
+        c.addEventListener("change", () => {
+          c.checked ? state.cats.add(c.value) : state.cats.delete(c.value);
+          resetPage();
+          render();
+        }),
+      );
+      document.querySelectorAll(".diet").forEach((d) =>
+        d.addEventListener("change", () => {
+          state.diet[d.value] = d.checked;
+          resetPage();
+          render();
+        }),
+      );
+      document.querySelectorAll(".badgef").forEach((b) =>
+        b.addEventListener("change", () => {
+          b.checked ? state.badges.add(b.value) : state.badges.delete(b.value);
+          resetPage();
+          render();
+        }),
+      );
+      document.querySelectorAll(".rating").forEach((r) =>
+        r.addEventListener("change", () => {
+          state.rating = parseFloat(r.value);
+          resetPage();
+          render();
+        }),
+      );
+
+      el.sort.addEventListener("change", () => {
+        state.sort = el.sort.value;
+        resetPage(false);
+        render();
+      });
+      el.minPrice.addEventListener("change", () => {
+        state.price.min = el.minPrice.value
+          ? parseFloat(el.minPrice.value)
+          : null;
+        resetPage();
+        render();
+      });
+      el.maxPrice.addEventListener("change", () => {
+        state.price.max = el.maxPrice.value
+          ? parseFloat(el.maxPrice.value)
+          : null;
+        resetPage();
+        render();
+      });
+
+      document.getElementById("clearAll").addEventListener("click", () => {
+        clearFilters();
+        render();
+      });
+      document.getElementById("resetFilters").addEventListener("click", () => {
+        clearFilters();
+        render();
+      });
+
+      el.loadMore.addEventListener("click", () => {
+        state.page++;
+        render();
+      });
+
+      function clearFilters() {
+        state.q = "";
+        state.cats.clear();
+        document.querySelectorAll(".cat").forEach((c) => (c.checked = false));
+        state.diet = { vegan: false, gf: false, nutfree: false };
+        document.querySelectorAll(".diet").forEach((d) => (d.checked = false));
+        state.price = { min: null, max: null };
+        el.minPrice.value = "";
+        el.maxPrice.value = "";
+        state.rating = 0;
+        document.getElementById("r0").checked = true;
+        state.badges.clear();
+        document
+          .querySelectorAll(".badgef")
+          .forEach((b) => (b.checked = false));
+        state.sort = "featured";
+        el.sort.value = "featured";
+        state.page = 1;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      function resetPage(scroll = true) {
+        state.page = 1;
+        if (scroll) window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // Filtering logic
+      function applyFilters(items) {
+        return items.filter((p) => {
+          if (state.cats.size && !state.cats.has(p.category)) return false;
+          if (state.diet.vegan && !p.diet.vegan) return false;
+          if (state.diet.gf && !p.diet.gf) return false;
+          if (state.diet.nutfree && !p.diet.nutfree) return false;
+          if (state.price.min != null && p.price < state.price.min)
+            return false;
+          if (state.price.max != null && p.price > state.price.max)
+            return false;
+          if (p.rating < state.rating) return false;
+          if (
+            state.badges.size &&
+            ![...state.badges].every((b) => p.badges.includes(b))
+          )
+            return false;
+          if (state.q) {
+            const txt = (
+              p.name +
+              " " +
+              p.category +
+              " " +
+              p.badges.join(" ")
+            ).toLowerCase();
+            if (!txt.includes(state.q)) return false;
+          }
+          return true;
+        });
+      }
+
+      function sortItems(items) {
+        const s = state.sort;
+        const arr = items.slice();
+        if (s === "featured")
+          return arr.sort(
+            (a, b) =>
+              b.rating - a.rating ||
+              new Date(b.createdAt) - new Date(a.createdAt),
+          );
+        if (s === "newest")
+          return arr.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+          );
+        if (s === "rating") return arr.sort((a, b) => b.rating - a.rating);
+        if (s === "price-asc") return arr.sort((a, b) => a.price - b.price);
+        if (s === "price-desc") return arr.sort((a, b) => b.price - a.price);
+        return arr;
+      }
+
+      // Render
+      function render(forceReset = false) {
+        const filtered = applyFilters(catalog);
+        const sorted = sortItems(filtered);
+        const end = state.page * state.perPage;
+        const visible = sorted.slice(0, end);
+        el.resultCount.textContent = filtered.length;
+        el.loadMore.classList.toggle(
+          "d-none",
+          visible.length >= filtered.length || filtered.length === 0,
+        );
+        el.empty.classList.toggle("d-none", filtered.length !== 0);
+
+        // active chips
+        renderChips();
+
+        // grid/list
+        el.grid.className = state.view === "grid" ? "row g-4" : "vstack gap-3";
+        el.grid.innerHTML = "";
+        visible.forEach((p) => el.grid.appendChild(card(p)));
+      }
+
+      function renderChips() {
+        const chips = [];
+        if (state.q)
+          chips.push(
+            chip(`Search: "${state.q}"`, () => {
+              state.q = "";
+              el.q.value = "";
+              render();
+            }),
+          );
+        state.cats.forEach((c) =>
+          chips.push(
+            chip(c, () => {
+              state.cats.delete(c);
+              document.querySelector(`.cat[value="${c}"]`).checked = false;
+              render();
+            }),
+          ),
+        );
+        Object.entries(state.diet).forEach(([k, v]) => {
+          if (v)
+            chips.push(
+              chip(
+                k === "gf"
+                  ? "Gluten‑free"
+                  : k === "nutfree"
+                    ? "Nut‑free"
+                    : "Vegan",
+                () => {
+                  state.diet[k] = false;
+                  document.querySelector(`.diet[value="${k}"]`).checked = false;
+                  render();
+                },
+              ),
+            );
+        });
+        if (state.price.min != null)
+          chips.push(
+            chip(`Min ${fmt(state.price.min)}`, () => {
+              state.price.min = null;
+              el.minPrice.value = "";
+              render();
+            }),
+          );
+        if (state.price.max != null)
+          chips.push(
+            chip(`Max ${fmt(state.price.max)}`, () => {
+              state.price.max = null;
+              el.maxPrice.value = "";
+              render();
+            }),
+          );
+        if (state.rating > 0)
+          chips.push(
+            chip(`${state.rating}★+`, () => {
+              state.rating = 0;
+              document.getElementById("r0").checked = true;
+              render();
+            }),
+          );
+        state.badges.forEach((b) =>
+          chips.push(
+            chip(b, () => {
+              state.badges.delete(b);
+              document.querySelector(`.badgef[value="${b}"]`).checked = false;
+              render();
+            }),
+          ),
+        );
+
+        el.activeChips.innerHTML = "";
+        chips.forEach((c) => el.activeChips.appendChild(c));
+        if (chips.length) {
+          const clr = document.createElement("button");
+          clr.className = "btn btn-sm btn-outline-dark";
+          clr.innerHTML = '<i class="bi bi-x-circle"></i> Clear all';
+          clr.onclick = () => {
+            clearFilters();
+            render();
+          };
+          el.activeChips.appendChild(clr);
+        }
+      }
+
+      function chip(text, onx) {
+        const span = document.createElement("span");
+        span.className = "active-chip";
+        span.innerHTML = `${text} <button aria-label="remove">&times;</button>`;
+        span.querySelector("button").onclick = onx;
+        return span;
+      }
+
+      function card(p) {
+        const col = document.createElement("div");
+        col.className = state.view === "grid" ? "col-12 col-sm-6 col-lg-4" : "";
+        const badges = `
+        ${p.badges.includes("New") ? '<span class="badge badge-new me-1">New</span>' : ""}
+        ${p.badges.includes("Top Rated") ? '<span class="badge badge-top text-white me-1">Top</span>' : ""}
+        ${p.badges.includes("Limited") ? '<span class="badge text-bg-warning me-1">Limited</span>' : ""}
+        ${p.diet.vegan ? '<span class="badge text-bg-success me-1">Vegan</span>' : ""}
+        ${p.diet.gf ? '<span class="badge text-bg-info me-1">GF</span>' : ""}
+        ${p.diet.nutfree ? '<span class="badge text-bg-light me-1">Nut‑free</span>' : ""}
+      `;
+        const ratingStars = "★★★★★☆☆☆☆☆".slice(
+          5 - Math.round(p.rating),
+          10 - Math.round(p.rating),
+        );
+        const inner = `
+                  <div class="card card-product h-100 position-relative ${state.view === "list" ? "p-2" : ""}">
+                    <button class="btn btn-sm btn-light rounded-circle wishlist position-absolute z-2" style="top:10px; right:10px" title="Save">
+                      <i class="bi bi-heart"></i>
+                    </button>
+
+                    <div class="row g-0 ${state.view === "list" ? "align-items-center" : ""}">
+                      <div class="${state.view === "list" ? "col-md-5" : "col-12"}">
+                        <a class="d-block" href="single-product.html?id=${p.id}">
+                          <img src="${p.img}" class="thumb w-100" alt="${p.name}">
+                        </a>
+                      </div>
+
+                      <div class="${state.view === "list" ? "col-md-7" : ""}">
+                        <div class="card-body d-flex flex-column h-100 position-relative">
+                          <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title m-0">
+                              <a class="link-dark text-decoration-none" href="single-product.html?id=${p.id}">${p.name}</a>
+                            </h5>
+                            <div class="ms-2 fw-semibold">${fmt(p.price)}</div>
+                          </div>
+
+                          <div class="small text-secondary">${p.category} • ${p.rating.toFixed(1)} <span aria-hidden="true">★</span></div>
+                          <div class="mt-2">${badges}</div>
+
+                          <!-- This link makes the entire card click through -->
+                          <a class="stretched-link" href="single-product.html?id=${p.id}" aria-label="${p.name}"></a>
+
+                          <div class="d-flex gap-3 align-items-center pt-2 position-relative z-2">
+                          <button class="btn btn-dark btn-sm add"
+                            data-id="${p.id}"
+                            data-name="${p.name}"
+                            data-price="${p.price}"
+                            data-img="${p.img}"
+                            data-desc="${p.category} • ${p.rating.toFixed(1)}★">
+                            <i class="bi bi-bag-plus"></i> Add
+                          </button>
+
+                            <a class="btn btn-outline-dark btn-sm" href="single-product.html?id=${p.id}">
+                              <i class="bi bi-eye"></i> View
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>`;
+        col.innerHTML = inner;
+        // add handler
+        col.querySelector(".add").addEventListener("click", (e) => {
+          e.preventDefault();
+          const btn = e.currentTarget;
+          openAddModal({
+            id: btn.dataset.id,
+            name: btn.dataset.name,
+            price: parseFloat(btn.dataset.price),
+            img: btn.dataset.img,
+            description:
+              btn.dataset.desc || `${p.category} • ${p.rating.toFixed(1)}★`,
+          });
+        });
+
+        return col;
+      }
+
+      // --- page-only cart (like index.html) ---
+      const cart = [];
+      function cartCount() {
+        return cart.reduce((a, c) => a + (c.qty || 1), 0);
+      }
+      function renderCartCount() {
+        const el = document.getElementById("cartCount");
+        if (el) el.textContent = cartCount();
+      }
+      renderCartCount();
+
+      // --- Add-to-Cart modal wiring ---
+      const addModalEl = document.getElementById("addModal");
+      const addModal = new bootstrap.Modal(addModalEl);
+      const addNameEl = document.getElementById("addName");
+      const addPriceEl = document.getElementById("addPrice");
+      const addDescriptionEl = document.getElementById("addDescription");
+      const addImgEl = document.getElementById("addImg");
+      const addQtyEl = document.getElementById("addQty");
+      const confirmAddBtn = document.getElementById("confirmAdd");
+
+      let pendingItem = null;
+
+      function openAddModal(item) {
+        pendingItem = item; // { id, name, price, img, description? }
+        addNameEl.textContent = item.name;
+        addPriceEl.textContent = `$${item.price.toFixed(2)}`;
+        addDescriptionEl.textContent = item.description || "";
+        addImgEl.src =
+          item.img || "https://placehold.co/300x300/eee/333?text=Cupcake";
+        addImgEl.alt = item.name;
+        addQtyEl.value = 1;
+        addModal.show();
+      }
+
+      confirmAddBtn.addEventListener("click", () => {
+        if (!pendingItem) return;
+        const qty = Math.max(1, parseInt(addQtyEl.value, 10) || 1);
+        const existing =
+          cart.find((i) => i.id === pendingItem.id) ||
+          (cart.push({
+            id: pendingItem.id,
+            name: pendingItem.name,
+            price: pendingItem.price,
+            img: pendingItem.img,
+            qty: 0,
+          }),
+          cart[cart.length - 1]);
+        existing.qty += qty;
+
+        addModal.hide();
+        renderCartCount();
+        toast(`${pendingItem.name} × ${qty} added to cart`);
+        pendingItem = null;
+      });
+
+      // Init
+      render();
+    </script>
+  </body>
+</html>

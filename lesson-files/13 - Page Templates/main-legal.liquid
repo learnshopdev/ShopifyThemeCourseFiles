@@ -1,0 +1,241 @@
+{{ 'main-legal.css' | asset_url | stylesheet_tag }}
+
+<!-- Header -->
+<header class="hero py-5 border-bottom">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-8">
+        <span
+          class="badge pill"
+          style="background: linear-gradient(90deg, var(--grape), var(--bubble)); color:#fff;"
+        >
+          {{ section.settings.badge_label }}
+        </span>
+
+        <h1 class="brand fw-black mt-3">{{ page.title }}</h1>
+
+        <div class="lead">{{ section.settings.intro_richtext }}</div>
+
+        <div class="small text-secondary mt-1">
+          Last updated: <time>{{ section.settings.last_updated_text }}</time>
+        </div>
+      </div>
+
+
+      <div class="col-lg-4">
+      <div class="cardy p-3 p-md-4">
+          <h6 class="mb-2">{{ section.settings.contact_title | default: 'Questions?' }}</h6>
+          {% if section.settings.contact_blurb != blank %}
+          <p class="small text-secondary mb-2">{{ section.settings.contact_blurb }}</p>
+          {% endif %}
+          <div class="d-grid gap-2">
+          {% if section.settings.contact_email != blank %}
+              <a class="btn btn-dark" href="mailto:{{ section.settings.contact_email }}">
+              <i class="bi bi-envelope"></i> {{ section.settings.contact_email }}
+              </a>
+          {% endif %}
+          <a class="btn btn-outline-dark" href="{{ section.settings.contact_link | default: routes.contact_url }}">
+              <i class="bi bi-chat"></i> {{ section.settings.contact_link_label | default: 'Contact form' }}
+          </a>
+          </div>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- Body -->
+<main class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <!-- TOC -->
+      {% assign has_blocks = section.blocks | size %}
+      {% if has_blocks > 0 %}
+        <aside class="col-lg-3 order-lg-2">
+          <div class="cardy p-3 toc">
+            <h6 class="mb-2">On this page</h6>
+            <nav class="small vstack gap-1">
+              {% for b in section.blocks %}
+                <a class="link-dark" href="#{{ b.settings.anchor | default: b.id }}">{{ b.settings.title | default: 'Section' }}</a>
+              {% endfor %}
+            </nav>
+          </div>
+        </aside>
+      {% endif %}
+
+      <!-- Content -->
+      <section class="col-lg-9 order-lg-1">
+        <div class="vstack gap-4">
+          {% for b in section.blocks %}
+            {% assign anchor_id = b.settings.anchor | default: b.id %}
+            <div id="{{ anchor_id }}" class="cardy p-3 p-md-4">
+              {% case b.type %}
+                {% when 'legal_section' %}
+                  {% if b.settings.title != blank %}
+                    <h3 class="brand fw-black h4">{{ b.settings.title }}</h3>
+                  {% endif %}
+                  {% if b.settings.content != blank %}
+                    <div class="small text-secondary">
+                      {{ b.settings.content }}
+                    </div>
+                  {% endif %}
+
+                {% when 'legal_two_col' %}
+                  {% if b.settings.title != blank %}
+                    <h3 class="brand fw-black h4">{{ b.settings.title }}</h3>
+                  {% endif %}
+                  <div class="row g-3 small text-secondary">
+                    <div class="col-md-6">
+                      <div class="p-3 border rounded-4 h-100">
+                        {% if b.settings.col1_title != blank %}
+                          <div class="fw-semibold mb-1">{{ b.settings.col1_title }}</div>
+                        {% endif %}
+                        <div class="mb-0 vstack gap-1">
+                          {{ b.settings.col1_richtext }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="p-3 border rounded-4 h-100">
+                        {% if b.settings.col2_title != blank %}
+                          <div class="fw-semibold mb-1">{{ b.settings.col2_title }}</div>
+                        {% endif %}
+                        <div class="mb-0 vstack gap-1">
+                          {{ b.settings.col2_richtext }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              {% endcase %}
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+
+{% schema %}
+{
+  "name": "Main legal page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_label",
+      "label": "Badge label",
+      "default": "Legal"
+    },
+    {
+      "type": "text",
+      "id": "last_updated_text",
+      "label": "Last updated (fallback text)",
+      "default": "2025"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_richtext",
+      "label": "Intro text",
+      "default": "<p>This page explains our policies and terms.</p>"
+    },
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Contact card title",
+      "default": "Questions?"
+    },
+    {
+      "type": "richtext",
+      "id": "contact_blurb",
+      "label": "Contact blurb",
+      "default": "<p>We’re happy to help with requests or questions.</p>"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact email",
+      "default": "privacy@cupcakecloud.example"
+    },
+    {
+      "type": "url",
+      "id": "contact_link",
+      "label": "Contact link (URL)"
+    },
+    {
+      "type": "text",
+      "id": "contact_link_label",
+      "label": "Contact link label",
+      "default": "Contact form"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "legal_section",
+      "name": "Section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Anchor (ID)",
+          "info": "Used for in-page links, e.g. 'cookies'."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Section title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Add your section content here.</p>"
+        }
+      ]
+    },
+    {
+      "type": "legal_two_col",
+      "name": "Two-column section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Anchor (ID)",
+          "info": "Used for in-page links, e.g. 'collect' or 'rights'."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Section title"
+        },
+        {
+          "type": "text",
+          "id": "col1_title",
+          "label": "Left title",
+          "default": "Column 1"
+        },
+        {
+          "type": "richtext",
+          "id": "col1_richtext",
+          "label": "Left content",
+          "default": "<ul><li>Item one</li><li>Item two</li></ul>"
+        },
+        {
+          "type": "text",
+          "id": "col2_title",
+          "label": "Right title",
+          "default": "Column 2"
+        },
+        {
+          "type": "richtext",
+          "id": "col2_richtext",
+          "label": "Right content",
+          "default": "<ul><li>Item one</li><li>Item two</li></ul>"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1382 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cupcake Cloud — Sweet & Colorful</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@500;700;900&family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --grape: #7e57c2;
+        --bubble: #f48fb1;
+        --mint: #2dd4bf;
+        --lemon: #fcd34d;
+        --sky: #60a5fa;
+        --ink: #0f172a;
+        --cream: #fffaf6;
+      }
+      body {
+        background: linear-gradient(180deg, #fff 0%, #fff5fb 35%, #f0fbff 100%);
+        color: var(--ink);
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      .brand {
+        font-family: Grandstander, system-ui, sans-serif;
+      }
+
+      /* NAV */
+      .navbar {
+        backdrop-filter: saturate(130%) blur(6px);
+      }
+      .nav-link {
+        position: relative;
+      }
+      .nav-link:after {
+        content: "";
+        position: absolute;
+        left: 0.6rem;
+        right: 0.6rem;
+        bottom: 0.25rem;
+        height: 3px;
+        background: linear-gradient(90deg, var(--bubble), var(--mint));
+        border-radius: 99px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+      }
+      .nav-link:hover:after,
+      .nav-link.active:after {
+        transform: scaleX(1);
+      }
+
+      /* HERO */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            800px 300px at 10% -20%,
+            rgba(244, 143, 177, 0.35) 0,
+            transparent 60%
+          ),
+          radial-gradient(
+            800px 300px at 110% 10%,
+            rgba(96, 165, 250, 0.35) 0,
+            transparent 60%
+          ),
+          linear-gradient(135deg, #fff 0%, #fffaf6 60%, #f0fbff 100%);
+      }
+      .hero-wave {
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+      }
+      .badge-candy {
+        background: linear-gradient(90deg, var(--grape), var(--bubble));
+      }
+      .hero-card {
+        background: #fff;
+        border: 0;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      /* COLLECTIONS */
+      .collection-card {
+        border: 0;
+        border-radius: 24px;
+        overflow: hidden;
+        color: #0f172a;
+        background: #fff;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .collection-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.12);
+      }
+      .ribbon {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: linear-gradient(90deg, var(--lemon), var(--mint));
+        padding: 0.35rem 0.6rem;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.75rem;
+      }
+
+      /* PRODUCT GRID */
+      .card-product {
+        border: 0;
+        border-radius: 22px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      }
+      .card-product .thumb {
+        aspect-ratio: 4/3;
+        object-fit: cover;
+      }
+      .pill {
+        border-radius: 999px;
+        font-weight: 600;
+      }
+
+      /* BANNER */
+      .promo {
+        background: linear-gradient(
+          90deg,
+          var(--bubble),
+          var(--sky),
+          var(--mint)
+        );
+        color: #0b2a2d;
+      }
+
+      /* COUNTDOWN */
+      .countdown {
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.5px;
+      }
+
+      /* FOOTER */
+      .footer {
+        background: #0b1220;
+        color: #cbd5e1;
+      }
+      .footer a {
+        color: #fbcfe8;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        text-decoration: underline;
+      }
+
+      .floating-cart {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        border: 0;
+        border-radius: 50%;
+        padding: 14px 16px;
+        background: linear-gradient(135deg, var(--grape), var(--bubble));
+        color: #fff;
+        box-shadow: 0 10px 30px rgba(126, 87, 194, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Ticker -->
+    <div class="promo py-2 text-center small">
+      <div class="container">
+        <i class="bi bi-ticket-perforated"></i> Use code
+        <strong>SWEET10</strong> for 10% off — today only!
+      </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-white sticky-top border-bottom py-3">
+      <div class="container">
+        <a class="navbar-brand brand d-flex align-items-center" href="#">
+          <span class="me-2" aria-hidden="true">
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 64 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="32" cy="20" r="10" fill="url(#g1)" />
+              <path
+                d="M10 34h44l-6 18a4 4 0 0 1-3.8 2.7H19.8A4 4 0 0 1 16 52l-6-18Z"
+                fill="url(#g2)"
+              />
+              <defs>
+                <linearGradient
+                  id="g1"
+                  x1="22"
+                  y1="10"
+                  x2="42"
+                  y2="30"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#F48FB1" />
+                  <stop offset="1" stop-color="#60A5FA" />
+                </linearGradient>
+                <linearGradient
+                  id="g2"
+                  x1="10"
+                  y1="34"
+                  x2="54"
+                  y2="52"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FCD34D" />
+                  <stop offset="1" stop-color="#2DD4BF" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <span class="fs-3">Cupcake Cloud</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#nav"
+          aria-controls="nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="collections.html">Collections</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="all-products.html">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#flavorModal"
+              >
+                Flavor of the Week
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+          <div class="d-flex ms-lg-3 gap-2 align-items-center">
+            <!-- Auth: Sign in button (shown when logged out) -->
+            <button
+              class="btn btn-outline-secondary"
+              id="btnSignIn"
+              data-bs-toggle="modal"
+              data-bs-target="#authModal"
+            >
+              <i class="bi bi-person"></i> Sign in
+            </button>
+
+            <!-- Auth: Register button (shown when logged out) -->
+            <a class="btn btn-dark" id="btnRegister" href="register.html">
+              <i class="bi bi-person-plus"></i> Register
+            </a>
+
+            <!-- Auth: user dropdown (shown when logged in) -->
+            <div class="dropdown d-none" id="userMenu">
+              <button
+                class="btn btn-outline-secondary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-person-circle"></i>
+                <span id="navUserName">Account</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" href="account.html"
+                    ><i class="bi bi-person"></i> Account</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="orders.html"
+                    ><i class="bi bi-receipt"></i> Orders</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <button class="dropdown-item text-danger" id="btnLogout">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Log out
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Existing cart / order buttons -->
+            <a class="btn btn-outline-dark" href="cart.html">
+              <i class="bi bi-bag"></i> Cart
+              <span class="badge text-bg-danger ms-1" id="cartCount">0</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero pt-5 pb-0">
+      <div class="container pt-4 pb-5">
+        <div class="row align-items-center g-2">
+          <div class="col-lg-6">
+            <span class="badge badge-candy rounded-pill"
+              >New summer collection</span
+            >
+            <h1 class="display-4 brand fw-black mt-3">
+              Bite‑size joy in
+              <span
+                style="
+                  background: linear-gradient(
+                    90deg,
+                    var(--bubble),
+                    var(--mint)
+                  );
+                  -webkit-background-clip: text;
+                  background-clip: text;
+                  color: transparent;
+                "
+                >every swirl</span
+              >.
+            </h1>
+            <p class="lead">
+              Bright, buttery, and baked this morning. Build a box or grab a
+              dozen of our colorful bestsellers.
+            </p>
+            <div class="d-flex flex-wrap gap-3 mt-3">
+              <a class="btn btn-dark btn-lg" href="all-products.html"
+                ><i class="bi bi-bag-heart me-1"></i> Shop Cupcakes</a
+              >
+              <a class="btn btn-outline-dark btn-lg" href="collections.html"
+                ><i class="bi bi-grid-1x2 me-1"></i> Explore Collections</a
+              >
+            </div>
+            <div class="d-flex align-items-center gap-3 mt-4">
+              <div class="text-warning">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                ><i class="bi bi-star-fill"></i>
+              </div>
+              <small class="text-secondary">2,300+ five‑star reviews</small>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card hero-card rounded-4 p-3 p-md-4">
+              <img
+                class="img-fluid rounded-4"
+                src="https://placehold.co/950x600/fbcfe8/0b1220?text=Colorful+Cupcake+Stack"
+                alt="Cupcake stack"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- COLLECTIONS -->
+    <section id="collections" class="py-5">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-3">
+          <h2 class="brand fw-black m-0">Shop by collection</h2>
+          <a class="link-dark" href="collections.html"
+            >See all <i class="bi bi-arrow-right-short"></i
+          ></a>
+        </div>
+        <div class="row g-4">
+          <div class="col-12 col-md-6 col-xl-3">
+            <div class="collection-card position-relative">
+              <span class="ribbon"
+                ><i class="bi bi-stars"></i> Bestsellers</span
+              >
+              <img
+                class="w-100"
+                src="https://placehold.co/800x520/ffe999/0b1220?text=Bestsellers"
+                alt="Bestsellers"
+              />
+              <div class="p-3">
+                <h5 class="mb-1">Bestsellers</h5>
+                <p class="small text-secondary mb-2">
+                  Crowd‑pleasers for every party.
+                </p>
+                <a class="btn btn-sm btn-dark" href="#shop">Shop now</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-xl-3">
+            <div class="collection-card">
+              <img
+                class="w-100"
+                src="https://placehold.co/800x520/b8f3ea/0b1220?text=Fruity+Fresh"
+                alt="Fruity"
+              />
+              <div class="p-3">
+                <h5 class="mb-1">Fruity Fresh</h5>
+                <p class="small text-secondary mb-2">
+                  Bright citrus, berry bursts, tropical notes.
+                </p>
+                <a class="btn btn-sm btn-outline-dark" href="#shop">Explore</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-xl-3">
+            <div class="collection-card">
+              <img
+                class="w-100"
+                src="https://placehold.co/800x520/e1d9ff/0b1220?text=Chocolatey"
+                alt="Chocolate"
+              />
+              <div class="p-3">
+                <h5 class="mb-1">Chocolatey</h5>
+                <p class="small text-secondary mb-2">
+                  Mocha, fudge, and cocoa‑rich swirls.
+                </p>
+                <a class="btn btn-sm btn-outline-dark" href="#shop">Explore</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-xl-3">
+            <div class="collection-card">
+              <img
+                class="w-100"
+                src="https://placehold.co/800x520/c7e1ff/0b1220?text=Special+Diet"
+                alt="Special Diet"
+              />
+              <div class="p-3">
+                <h5 class="mb-1">Special Diet</h5>
+                <p class="small text-secondary mb-2">
+                  Vegan & gluten‑free treats that wow.
+                </p>
+                <a class="btn btn-sm btn-outline-dark" href="collections.html">Explore</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCT GRID -->
+    <section id="shop" class="py-5">
+      <div class="container">
+        <div
+          class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-3"
+        >
+          <h2 class="brand fw-black m-0">This week’s favorites</h2>
+          <a class="link-dark" href="/">
+            See all <i class="bi bi-arrow-right-short"></i>
+          </a>
+        </div>
+
+        <div class="row g-4" id="grid">
+          <!-- Card 1 -->
+          <div
+            class="col-12 col-sm-6 col-lg-4 col-xl-3 product"
+            data-tags="classic vanilla sprinkles"
+          >
+            <div class="card card-product h-100">
+              <img
+                class="thumb"
+                src="https://placehold.co/600x400/ffd1e7/0b1220?text=Vanilla+Confetti"
+                alt="Vanilla Confetti"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Vanilla Confetti</h5>
+                <p class="card-text small text-secondary">
+                  Buttery vanilla + rainbow sprinkles.
+                </p>
+                <div
+                  class="d-flex justify-content-between align-items-center mt-auto"
+                >
+                  <span class="badge text-bg-light pill">Classic</span>
+                  <strong>$3.50</strong>
+                </div>
+                <button
+                  class="btn btn-dark w-100 mt-3 add"
+                  data-name="Vanilla Confetti"
+                  data-price="3.50"
+                  data-description="Buttery vanilla + rainbow sprinkles."
+                  data-img="https://placehold.co/600x400/ffd1e7/0b1220?text=Vanilla+Confetti"
+                >
+                  <i class="bi bi-bag-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div
+            class="col-12 col-sm-6 col-lg-4 col-xl-3 product"
+            data-tags="chocolate coffee mocha"
+          >
+            <div class="card card-product h-100">
+              <img
+                class="thumb"
+                src="https://placehold.co/600x400/ded3ff/0b1220?text=Mocha+Latte+Buzz"
+                alt="Mocha Latte Buzz"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Mocha Latte Buzz</h5>
+                <p class="card-text small text-secondary">
+                  Espresso buttercream, cocoa‑rich base.
+                </p>
+                <div
+                  class="d-flex justify-content-between align-items-center mt-auto"
+                >
+                  <span class="badge text-bg-dark pill">Chocolate</span>
+                  <strong>$3.95</strong>
+                </div>
+                <button
+                  class="btn btn-dark w-100 mt-3 add"
+                  data-name="Mocha Latte Buzz"
+                  data-price="3.95"
+                  data-description="Espresso buttercream, cocoa‑rich base."
+                >
+                  <i class="bi bi-bag-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div
+            class="col-12 col-sm-6 col-lg-4 col-xl-3 product"
+            data-tags="fruity lime graham"
+          >
+            <div class="card card-product h-100">
+              <img
+                class="thumb"
+                src="https://placehold.co/600x400/c4f2e8/0b1220?text=Key+Lime+Pie"
+                alt="Key Lime Pie"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Key Lime Pie</h5>
+                <p class="card-text small text-secondary">
+                  Zesty lime on graham crust, cream cheese top.
+                </p>
+                <div
+                  class="d-flex justify-content-between align-items-center mt-auto"
+                >
+                  <span class="badge text-bg-success pill">Fruity</span>
+                  <strong>$3.75</strong>
+                </div>
+                <button
+                  class="btn btn-dark w-100 mt-3 add"
+                  data-name="Key Lime Pie"
+                  data-price="3.75"
+                  data-description="Zesty lime on graham crust, cream cheese top."
+                >
+                  <i class="bi bi-bag-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div
+            class="col-12 col-sm-6 col-lg-4 col-xl-3 product"
+            data-tags="specialty matcha honey"
+          >
+            <div class="card card-product h-100">
+              <img
+                class="thumb"
+                src="https://placehold.co/600x400/cffafe/0b1220?text=Matcha+Honey+Harmony"
+                alt="Matcha Honey Harmony"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Matcha Honey Harmony</h5>
+                <p class="card-text small text-secondary">
+                  Earthy green tea, whipped honey‑matcha frosting.
+                </p>
+                <div
+                  class="d-flex justify-content-between align-items-center mt-auto"
+                >
+                  <span class="badge text-bg-warning pill">Specialty</span>
+                  <strong>$4.25</strong>
+                </div>
+                <button
+                  class="btn btn-dark w-100 mt-3 add"
+                  data-name="Matcha Honey Harmony"
+                  data-price="4.25"
+                  data-description="Earthy green tea, whipped honey‑matcha frosting."
+                >
+                  <i class="bi bi-bag-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 5 -->
+          <div
+            class="col-12 col-sm-6 col-lg-4 col-xl-3 product"
+            data-tags="chocolate cinnamon churro"
+          >
+            <div class="card card-product h-100">
+              <img
+                class="thumb"
+                src="https://placehold.co/600x400/ffe3b3/0b1220?text=Churro+Cinnamon+Swirl"
+                alt="Churro Cinnamon Swirl"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Churro Cinnamon Swirl</h5>
+                <p class="card-text small text-secondary">
+                  Cinnamon sugar dust & cream cheese swirl.
+                </p>
+                <div
+                  class="d-flex justify-content-between align-items-center mt-auto"
+                >
+                  <span class="badge text-bg-dark pill">Chocolate</span>
+                  <strong>$3.85</strong>
+                </div>
+                <button
+                  class="btn btn-dark w-100 mt-3 add"
+                  data-name="Churro Cinnamon Swirl"
+                  data-price="3.85"
+                  data-description="Cinnamon sugar dust & cream cheese swirl."
+                >
+                  <i class="bi bi-bag-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 6 -->
+          <div
+            class="col-12 col-sm-6 col-lg-4 col-xl-3 product"
+            data-tags="fruity strawberry cream"
+          >
+            <div class="card card-product h-100">
+              <img
+                class="thumb"
+                src="https://placehold.co/600x400/ffd1dc/0b1220?text=Strawberry+Shortcake"
+                alt="Strawberry Shortcake"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Strawberry Shortcake</h5>
+                <p class="card-text small text-secondary">
+                  Real strawberries, cloud‑light cream.
+                </p>
+                <div
+                  class="d-flex justify-content-between align-items-center mt-auto"
+                >
+                  <span class="badge text-bg-success pill">Fruity</span>
+                  <strong>$3.95</strong>
+                </div>
+                <button
+                  class="btn btn-dark w-100 mt-3 add"
+                  data-name="Strawberry Shortcake"
+                  data-price="3.95"
+                  data-description="Real strawberries, cloud‑light cream."
+                >
+                  <i class="bi bi-bag-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 7 -->
+          <div
+            class="col-12 col-sm-6 col-lg-4 col-xl-3 product"
+            data-tags="classic red velvet"
+          >
+            <div class="card card-product h-100">
+              <img
+                class="thumb"
+                src="https://placehold.co/600x400/fccde2/0b1220?text=Red+Velvet+Classic"
+                alt="Red Velvet Classic"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Red Velvet Classic</h5>
+                <p class="card-text small text-secondary">
+                  Buttermilk cocoa w/ cream cheese swirl.
+                </p>
+                <div
+                  class="d-flex justify-content-between align-items-center mt-auto"
+                >
+                  <span class="badge text-bg-light pill">Classic</span>
+                  <strong>$3.95</strong>
+                </div>
+                <button
+                  class="btn btn-dark w-100 mt-3 add"
+                  data-name="Red Velvet Classic"
+                  data-price="3.95"
+                  data-description="Buttermilk cocoa w/ cream cheese swirl."
+                >
+                  <i class="bi bi-bag-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 8 -->
+          <div
+            class="col-12 col-sm-6 col-lg-4 col-xl-3 product"
+            data-tags="specialty caramel pretzel"
+          >
+            <div class="card card-product h-100">
+              <img
+                class="thumb"
+                src="https://placehold.co/600x400/dff7ff/0b1220?text=Salted+Caramel+Pretzel"
+                alt="Salted Caramel Pretzel"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Salted Caramel Pretzel</h5>
+                <p class="card-text small text-secondary">
+                  Sweet‑salty caramel swirl + crunch.
+                </p>
+                <div
+                  class="d-flex justify-content-between align-items-center mt-auto"
+                >
+                  <span class="badge text-bg-warning pill">Specialty</span>
+                  <strong>$4.25</strong>
+                </div>
+                <button
+                  class="btn btn-dark w-100 mt-3 add"
+                  data-name="Salted Caramel Pretzel"
+                  data-price="4.25"
+                  data-description="Sweet‑salty caramel swirl + crunch."
+                >
+                  <i class="bi bi-bag-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <a class="btn btn-outline-dark btn-lg" href="#flavor"
+            ><i class="bi bi-box2-heart"></i> Build your own dozen</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER / STOREFRONT INFO -->
+    <section
+      class="py-5"
+      style="background: linear-gradient(90deg, #fff, #fff7fb, #f0fbff)"
+    >
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h3 class="brand fw-black">Join the Sprinkle Letter</h3>
+            <p class="mb-3">
+              Get 10% off your first order + early access to seasonal drops.
+            </p>
+            <form
+              onsubmit="event.preventDefault(); toast('Welcome to the Sprinkle Letter!'); this.reset();"
+            >
+              <div class="input-group input-group-lg" style="max-width: 520px">
+                <span class="input-group-text bg-white"
+                  ><i class="bi bi-envelope"></i
+                ></span>
+                <input
+                  type="email"
+                  required
+                  class="form-control"
+                  placeholder="you@sweetmail.com"
+                />
+                <button class="btn btn-dark" type="submit">Subscribe</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-5" id="visit">
+            <div class="p-4 border rounded-4 bg-white">
+              <h6 class="text-uppercase text-secondary">Visit our shop</h6>
+              <p class="mb-1">123 Sprinkle Lane, Sweet City</p>
+              <p class="mb-3">Open daily 9am – 7pm</p>
+              <a class="btn btn-outline-dark btn-sm" href="#"
+                ><i class="bi bi-geo-alt"></i> Get directions</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer pt-5 pb-4 mt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="brand fs-3 mb-2">Cupcake Cloud</div>
+            <p class="text-light">
+              Small‑batch bakery crafting colorful cupcakes since 2012.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" aria-label="Instagram"
+                ><i class="bi bi-instagram fs-4"></i
+              ></a>
+              <a href="#" aria-label="TikTok"
+                ><i class="bi bi-tiktok fs-4"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="bi bi-facebook fs-4"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <h6 class="text-uppercase text-secondary">Shop</h6>
+            <ul class="list-unstyled small">
+              <li>
+                <a href="all-products.html">All Cupcakes</a>
+              </li>
+              <li><a href="collections.html">Collections</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-2">
+            <h6 class="text-uppercase text-secondary">Help</h6>
+            <ul class="list-unstyled small">
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6 class="text-uppercase text-secondary">Guarantee</h6>
+            <p class="small">
+              If you don’t love it, we’ll make it right. That’s our
+              Sprinkle‑Happy Guarantee.
+            </p>
+          </div>
+        </div>
+        <hr class="border-secondary border-opacity-25 my-4" />
+        <div
+          class="d-flex flex-wrap justify-content-between small text-secondary"
+        >
+          <span>© <span id="year"></span> Cupcake Cloud</span>
+          <div class="d-flex gap-3">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating Cart Button -->
+    <a class="floating-cart" href="cart.html" aria-label="Open cart">
+      <i class="bi bi-bag-fill"></i>
+    </a>
+
+    <!-- ADD-TO-CART MODAL -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="bi bi-bag-plus me-1"></i> Add to cart
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="d-flex gap-3 align-items-center">
+              <img
+                id="addImg"
+                src=""
+                alt=""
+                class="rounded"
+                width="96"
+                height="96"
+                style="object-fit: cover"
+              />
+              <div>
+                <div id="addName" class="fw-semibold">Product Name</div>
+                <div class="small text-secondary">Price</div>
+                <p id="addDescription" class="card-text small text-secondary">
+                  Product Description
+                </p>
+                <div id="addPrice" class="h5 m-0">$0.00</div>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <label for="addQty" class="form-label small text-secondary"
+                >Quantity</label
+              >
+              <input
+                id="addQty"
+                type="number"
+                class="form-control"
+                min="1"
+                step="1"
+                value="1"
+              />
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-outline-dark" data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button class="btn btn-dark" id="confirmAdd">
+              <i class="bi bi-bag-plus"></i> Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLAVOR OF THE WEEK MODAL -->
+    <div
+      class="modal fade"
+      id="flavorModal"
+      tabindex="-1"
+      aria-labelledby="flavorModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="flavorModalLabel" class="modal-title brand fw-black">
+              Flavor of the Week
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="row g-4 align-items-center">
+              <div class="col-lg-6">
+                <img
+                  class="img-fluid rounded-4 shadow"
+                  src="https://placehold.co/900x560/fef3c7/0b1220?text=Flavor+of+the+Week:+Mango+Sunrise"
+                  alt="Flavor of the Week"
+                />
+              </div>
+              <div class="col-lg-6">
+                <h2 class="brand fw-black">
+                  Flavor of the Week: Mango Sunrise
+                </h2>
+                <p>
+                  Vanilla-mango marble cake with passionfruit curd and mango
+                  buttercream. Tropical sunshine in a bite.
+                </p>
+
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <span class="badge text-bg-warning">Limited</span>
+                  <span class="badge text-bg-info">Tropical</span>
+                </div>
+
+                <div class="p-3 border rounded-4 bg-white">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <strong>Ends in</strong>
+                    <div class="countdown h5 m-0" id="countdown">
+                      03d 00h 00m 00s
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex gap-3 mt-3">
+                  <button
+                    class="btn btn-dark add"
+                    data-name="Mango Sunrise (FOTW)"
+                    data-price="4.50"
+                  >
+                    <i class="bi bi-bag-plus"></i> Add to cart
+                  </button>
+                  <button
+                    class="btn btn-outline-dark"
+                    data-bs-dismiss="modal"
+                    onclick="scrollToShop()"
+                  >
+                    <i class="bi bi-bag"></i> See all flavors
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <small class="text-secondary"
+              >Limited-time drop — available while supplies last.</small
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sign in Modal -->
+    <div
+      class="modal fade"
+      id="authModal"
+      tabindex="-1"
+      aria-labelledby="authModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h5 class="modal-title brand fw-black" id="authModalLabel">
+              Sign in
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <form id="authForm" class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="authEmail"
+                placeholder="you@sweetmail.com"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="authPass"
+                placeholder="••••••••"
+                minlength="6"
+                required
+              />
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="authRemember"
+                />
+                <label class="form-check-label small" for="authRemember"
+                  >Remember me</label
+                >
+              </div>
+              <a href="#" class="small" id="forgotLink">Forgot password?</a>
+            </div>
+            <div class="d-grid mt-3">
+              <button class="btn btn-dark" type="submit">
+                <i class="bi bi-box-arrow-in-right"></i> Sign in
+              </button>
+            </div>
+            <p class="small text-secondary mt-3 mb-0">
+              Demo only — no real auth.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div
+      class="modal fade"
+      id="resetModal"
+      tabindex="-1"
+      aria-labelledby="resetModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h5 class="modal-title brand fw-black" id="resetModalLabel">
+              Reset password
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <form id="resetForm" class="modal-body">
+            <p class="text-secondary small mb-3">
+              Enter the email you use for Cupcake Cloud. We’ll send a link to
+              reset your password.
+            </p>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="resetEmail"
+                placeholder="you@sweetmail.com"
+                required
+              />
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                id="backToSignIn"
+              >
+                Back to sign in
+              </button>
+              <button class="btn btn-dark" id="resetSendBtn" type="submit">
+                <i class="bi bi-envelope-paper"></i> Send reset link
+              </button>
+            </div>
+            <div
+              id="resetFeedback"
+              class="alert alert-success rounded-3 mt-3 d-none"
+              role="alert"
+            >
+              <i class="bi bi-check-circle"></i> Check your email for a reset
+              link. (Demo only!)
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div
+      class="position-fixed bottom-0 start-50 translate-middle-x p-3"
+      style="z-index: 1080"
+    >
+      <div
+        id="liveToast"
+        class="toast align-items-center text-white bg-dark border-0"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body" id="toastMsg">Added to cart!</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // --- simple per-page cart (no storage) ---
+      const cart = [];
+
+      function cartCount() {
+        return cart.reduce((a, c) => a + c.qty, 0);
+      }
+      function renderCartCount() {
+        const countEl = document.getElementById("cartCount");
+        if (countEl) countEl.textContent = cartCount();
+      }
+      // initialize badge
+      renderCartCount();
+
+      // year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // small helper
+      let t;
+      function toast(msg) {
+        const el = document.getElementById("liveToast");
+        document.getElementById("toastMsg").textContent = msg;
+        (t || (t = new bootstrap.Toast(el, { delay: 2000 }))).show();
+      }
+
+      // search
+      const search = document.getElementById("search");
+      const products = [...document.querySelectorAll("#grid .product")];
+      search.addEventListener("input", () => {
+        const q = search.value.toLowerCase();
+        products.forEach((p) => {
+          const tag = p.dataset.tags;
+          p.classList.toggle("d-none", q && !tag.includes(q));
+        });
+      });
+
+      // simple cart
+      // ----- Add-to-Cart Modal wiring -----
+      const addModalEl = document.getElementById("addModal");
+      const addModal = new bootstrap.Modal(addModalEl);
+      const addNameEl = document.getElementById("addName");
+      const addPriceEl = document.getElementById("addPrice");
+      const addDescriptionEl = document.getElementById("addDescription");
+      const addImgEl = document.getElementById("addImg");
+      const addQtyEl = document.getElementById("addQty");
+      const confirmAddBtn = document.getElementById("confirmAdd");
+
+      // Temp selection state
+      let pendingItem = null;
+
+      document.querySelectorAll(".add").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+
+          const name = btn.dataset.name;
+          const price = parseFloat(btn.dataset.price);
+          const description = btn.dataset.description;
+          const img =
+            btn.dataset.img ||
+            "https://placehold.co/300x300/eee/333?text=Cupcake";
+
+          pendingItem = { name, price, img };
+
+          // Populate modal
+          addNameEl.textContent = name;
+          addPriceEl.textContent = `$${price.toFixed(2)}`;
+          addDescriptionEl.textContent = description;
+          addImgEl.src = img;
+          addImgEl.alt = name;
+          addQtyEl.value = 1;
+
+          addModal.show();
+        });
+      });
+
+      confirmAddBtn.addEventListener("click", () => {
+        if (!pendingItem) return;
+
+        const qty = Math.max(1, parseInt(addQtyEl.value, 10) || 1);
+        const item =
+          cart.find((i) => i.name === pendingItem.name) ||
+          (cart.push({
+            name: pendingItem.name,
+            price: pendingItem.price,
+            qty: 0,
+          }),
+          cart[cart.length - 1]);
+
+        item.qty += qty;
+
+        addModal.hide();
+        renderCartCount();
+        toast(`${pendingItem.name} × ${qty} added to cart`);
+        pendingItem = null;
+      });
+
+      function renderCart() {
+        const list = document.getElementById("cartList"); // might not exist on this page now
+        const totalEl = document.getElementById("cartTotal"); // might not exist on this page now
+        const countEl = document.getElementById("cartCount");
+
+        let total = 0;
+        cart.forEach((i) => {
+          total += i.price * i.qty;
+        });
+
+        // Update the mini count in navbar
+        if (countEl) countEl.textContent = cart.reduce((a, c) => a + c.qty, 0);
+
+        // Update modal list/total if present (e.g., on other pages)
+        if (list && totalEl) {
+          list.innerHTML = "";
+          cart.forEach((i, idx) => {
+            const li = document.createElement("li");
+            li.className =
+              "list-group-item d-flex justify-content-between align-items-center";
+            li.innerHTML = `<div><div class='fw-semibold'>${i.name}</div><small class='text-secondary'>$${i.price.toFixed(2)} × ${i.qty}</small></div>
+                    <div class='btn-group'>
+                      <button class='btn btn-sm btn-outline-secondary' onclick='chg(${idx},-1)'><i class="bi bi-dash"></i></button>
+                      <button class='btn btn-sm btn-outline-secondary' onclick='chg(${idx},1)'><i class="bi bi-plus"></i></button>
+                      <button class='btn btn-sm btn-outline-danger' onclick='delItem(${idx})'><i class="bi bi-x"></i></button>
+                    </div>`;
+            list.appendChild(li);
+          });
+          totalEl.textContent = `$${total.toFixed(2)}`;
+        }
+      }
+
+      function chg(i, d) {
+        cart[i].qty += d;
+        if (cart[i].qty <= 0) cart.splice(i, 1);
+        renderCart();
+      }
+      function delItem(i) {
+        cart.splice(i, 1);
+        renderCart();
+      }
+
+      const forgotLink = document.getElementById("forgotLink");
+      const authModalEl = document.getElementById("authModal");
+      const resetModalEl = document.getElementById("resetModal");
+      const resetForm = document.getElementById("resetForm");
+      const resetEmailEl = document.getElementById("resetEmail");
+      const resetSendBtn = document.getElementById("resetSendBtn");
+      const resetFeedback = document.getElementById("resetFeedback");
+      const backToSignIn = document.getElementById("backToSignIn");
+
+      forgotLink?.addEventListener("click", (e) => {
+        e.preventDefault();
+        bootstrap.Modal.getOrCreateInstance(authModalEl).hide();
+        resetFeedback.classList.add("d-none");
+        resetForm.reset();
+        setTimeout(
+          () => bootstrap.Modal.getOrCreateInstance(resetModalEl).show(),
+          150,
+        );
+      });
+
+      backToSignIn?.addEventListener("click", () => {
+        bootstrap.Modal.getOrCreateInstance(resetModalEl).hide();
+        setTimeout(
+          () => bootstrap.Modal.getOrCreateInstance(authModalEl).show(),
+          150,
+        );
+      });
+
+      resetForm?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        resetSendBtn.disabled = true;
+        const prev = resetSendBtn.innerHTML;
+        resetSendBtn.innerHTML =
+          '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending…';
+
+        // Demo “send”
+        setTimeout(() => {
+          resetSendBtn.disabled = false;
+          resetSendBtn.innerHTML = prev;
+          resetFeedback.classList.remove("d-none");
+
+          // Optional: close after a moment
+          // setTimeout(() => bootstrap.Modal.getOrCreateInstance(resetModalEl).hide(), 1500);
+        }, 800);
+      });
+
+      // countdown (72h from now)
+      const end = Date.now() + 72 * 60 * 60 * 1000;
+      const cd = document.getElementById("countdown");
+      const tick = () => {
+        const diff = Math.max(0, end - Date.now());
+        const d = Math.floor(diff / 86400000),
+          h = Math.floor((diff % 86400000) / 3600000),
+          m = Math.floor((diff % 3600000) / 60000),
+          s = Math.floor((diff % 60000) / 1000);
+        cd.textContent = `${String(d).padStart(2, "0")}d ${String(h).padStart(2, "0")}h ${String(m).padStart(2, "0")}m ${String(s).padStart(2, "0")}s`;
+        if (diff > 0) requestAnimationFrame(() => setTimeout(tick, 1000));
+      };
+      tick();
+
+      // scroll helper
+      function scrollToShop() {
+        document.getElementById("shop").scrollIntoView({ behavior: "smooth" });
+      }
+      window.scrollToShop = scrollToShop; // expose for button
+    </script>
+  </body>
+</html>

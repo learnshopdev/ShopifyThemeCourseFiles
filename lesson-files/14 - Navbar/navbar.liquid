@@ -1,0 +1,288 @@
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white sticky-top border-bottom py-3">
+  <div class="container">
+    <a class="navbar-brand brand d-flex align-items-center" href="{{ routes.root_url }}">
+      <span class="me-2" aria-hidden="true">
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 64 64"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="32" cy="20" r="10" fill="url(#g1)" />
+          <path
+            d="M10 34h44l-6 18a4 4 0 0 1-3.8 2.7H19.8A4 4 0 0 1 16 52l-6-18Z"
+            fill="url(#g2)"
+          />
+          <defs>
+            <linearGradient
+              id="g1"
+              x1="22"
+              y1="10"
+              x2="42"
+              y2="30"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#F48FB1" />
+              <stop offset="1" stop-color="#60A5FA" />
+            </linearGradient>
+            <linearGradient
+              id="g2"
+              x1="10"
+              y1="34"
+              x2="54"
+              y2="52"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#FCD34D" />
+              <stop offset="1" stop-color="#2DD4BF" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
+      <span class="fs-3">Cupcake Cloud</span>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#nav"
+      aria-controls="nav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        {% for link in section.settings.main-menu.links %}
+          <li class="nav-item">
+            <a class="nav-link{% if link.current %} active{% endif %}" href="{{ link.url }}">
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+
+        {% if section.settings.show_flavor_link %}
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
+              data-bs-toggle="modal"
+              data-bs-target="#flavorModal"
+            >
+              {{ section.settings.flavor_link_label | default: 'Flavor of the Week' }}
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+      <div class="d-flex ms-lg-3 gap-2 align-items-center">
+        {% if customer %}
+          <!-- Logged in: show user menu -->
+          <div class="dropdown" id="userMenu">
+            <button
+              class="btn btn-outline-secondary dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi bi-person-circle"></i>
+              <span id="navUserName">{{ customer.first_name | default: 'Account' }}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="{{ routes.account_url }}">
+                  <i class="bi bi-person"></i> Account
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{{ routes.account_url }}/orders">
+                  <i class="bi bi-receipt"></i> Orders
+                </a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <!-- Replace your logout button with this -->
+                  <a href="{{ routes.account_logout_url }}" class="dropdown-item text-danger">
+                    <i class="bi bi-box-arrow-right"></i> Log out
+                  </a>
+
+              </li>
+            </ul>
+          </div>
+        {% else %}
+          <!-- Logged out: show sign in + register -->
+          <a class="btn btn-outline-secondary" id="btnSignIn" href="{{ routes.account_login_url }}">
+            <i class="bi bi-person"></i> Sign in
+          </a>
+          <a class="btn btn-dark" id="btnRegister" href="{{ routes.account_register_url }}">
+            <i class="bi bi-person-plus"></i> Register
+          </a>
+        {% endif %}
+
+        <!-- Cart -->
+        <a class="btn btn-outline-dark" href="{{ routes.cart_url }}">
+          <i class="bi bi-bag"></i> Cart
+          {% if cart.item_count > 0 %}
+            <span class="badge text-bg-danger ms-1" id="cartCount">{{ cart.item_count }}</span>
+          {% endif %}
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+{% if section.settings.show_flavor_link %}
+  <div
+    class="modal fade"
+    id="flavorModal"
+    tabindex="-1"
+    aria-labelledby="flavorModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="flavorModalLabel" class="modal-title brand fw-black">
+            {{ section.settings.flavor_title | default: 'Flavor of the Week' }}
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row g-4 align-items-center">
+            <div class="col-lg-6">
+              {% if section.settings.flavor_image != blank %}
+                <img
+                  class="img-fluid rounded-4 shadow"
+                  src="{{ section.settings.flavor_image | image_url: width: 900, height: 560, crop: 'center' }}"
+                  alt="{{ section.settings.flavor_title | default: 'Flavor of the Week' | escape }}"
+                />
+              {% endif %}
+            </div>
+            <div class="col-lg-6">
+              <h2 class="brand fw-black">
+                {{ section.settings.flavor_headline | default: 'Flavor of the Week' }}
+              </h2>
+              {% if section.settings.flavor_desc != blank %}
+                <p>{{ section.settings.flavor_desc }}</p>
+              {% endif %}
+
+              {% if section.settings.flavor_badges != blank %}
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  {% assign t = section.settings.flavor_badges | downcase %}
+                  {% if t contains 'gluten-free' %}<span class="badge text-bg-success text-white me-1">Gluten-Free</span>{% endif %}
+                  {% if t contains 'kid-favorite' %}<span class="badge text-bg-pink text-white me-1">Kid Favorite</span>{% endif %}
+                  {% if t contains 'limited' %}<span class="badge text-bg-danger text-white me-1">Limited</span>{% endif %}
+                  {% if t contains 'filled' %}<span class="badge text-bg-purple text-white me-1">Filled</span>{% endif %}
+                  {% if t contains 'nut-free' %}<span class="badge text-bg-info text-dark me-1">Nut-free</span>{% endif %}
+                </div>
+              {% endif %}
+
+              {% if section.settings.flavor_note != blank %}
+                <div class="p-3 border rounded-4 bg-white">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <strong>Ends</strong>
+                    <div class="h6 m-0">{{ section.settings.flavor_note }}</div>
+                  </div>
+                </div>
+              {% endif %}
+
+              <div class="d-flex gap-3 mt-3">
+                {% if section.settings.flavor_product %}
+                  <a class="btn btn-dark" href="{{ section.settings.flavor_product.url }}">
+                    <i class="bi bi-bag-plus"></i>
+                    {{ section.settings.primary_btn_label | default: 'View product' }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% if section.settings.flavor_footer_note != blank %}
+          <div class="modal-footer">
+            <small class="text-secondary">{{ section.settings.flavor_footer_note }}</small>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Navbar",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "main-menu",
+      "label": "Main menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_flavor_link",
+      "label": "Show “Flavor of the Week” link & modal",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "flavor_link_label",
+      "label": "Nav link label",
+      "default": "Flavor of the Week"
+    },
+    {
+      "type": "text",
+      "id": "flavor_title",
+      "label": "Modal title",
+      "default": "Flavor of the Week"
+    },
+    {
+      "type": "text",
+      "id": "flavor_headline",
+      "label": "Headline",
+      "default": "Flavor of the Week: Mango Sunrise"
+    },
+    {
+      "type": "image_picker",
+      "id": "flavor_image",
+      "label": "Feature image"
+    },
+    {
+      "type": "textarea",
+      "id": "flavor_desc",
+      "label": "Description",
+      "default": "Vanilla-mango marble cake with passionfruit curd and mango buttercream."
+    },
+    {
+      "type": "text",
+      "id": "flavor_badges",
+      "label": "Badges (comma-separated)",
+      "default": "Limited,Tropical"
+    },
+    {
+      "type": "product",
+      "id": "flavor_product",
+      "label": "Linked product"
+    },
+    {
+      "type": "text",
+      "id": "primary_btn_label",
+      "label": "Primary button label",
+      "default": "View product"
+    },
+    {
+      "type": "text",
+      "id": "flavor_note",
+      "label": "Ends note (shown in card)",
+      "default": "Soon"
+    },
+    {
+      "type": "text",
+      "id": "flavor_footer_note",
+      "label": "Footer note",
+      "default": "Limited-time drop — available while supplies last."
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,52 @@
+<div class="col-md-4 pe-5">
+  <div class="brand fs-3 mb-2">{{ section.settings.brand_name | default: 'Cupcake Cloud' }}</div>
+
+  <p class="text-light">{{ section.settings.blurb }}</p>
+
+  <div class="d-flex gap-3">
+    {% if section.settings.ig_url != blank %}
+      <a href="{{ section.settings.ig_url }}" aria-label="Instagram"><i class="bi bi-instagram fs-4"></i></a>
+    {% endif %}
+    {% if section.settings.tt_url != blank %}
+      <a href="{{ section.settings.tt_url }}" aria-label="TikTok"><i class="bi bi-tiktok fs-4"></i></a>
+    {% endif %}
+    {% if section.settings.fb_url != blank %}
+      <a href="{{ section.settings.fb_url }}" aria-label="Facebook"><i class="bi bi-facebook fs-4"></i></a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Footer — Brand",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "Cupcake Cloud"
+    },
+    {
+      "type": "textarea",
+      "id": "blurb",
+      "label": "Short blurb",
+      "default": "Small-batch bakery crafting colorful cupcakes since 2012."
+    },
+    {
+      "type": "url",
+      "id": "ig_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "tt_url",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "fb_url",
+      "label": "Facebook URL"
+    }
+  ]
+}
+{% endschema %}

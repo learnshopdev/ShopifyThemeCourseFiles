@@ -1,0 +1,248 @@
+{{ 'main-contact.css' | asset_url | stylesheet_tag }}
+
+<!-- Hero -->
+<header class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <div class="cardy p-3 p-md-4">
+          <h5 class="mb-3">Send us a message</h5>
+          {% form 'contact', id: 'contactForm' %}
+            {% if form.posted_successfully? %}
+              <div class="alert alert-success" role="alert">
+                <i class="bi bi-check-circle"></i> Thanks! We received your message and will reply soon.
+              </div>
+            {% endif %}
+
+            {% if form.errors %}
+              <div class="alert alert-danger" role="alert">
+                {{ form.errors | default_errors }}
+              </div>
+            {% endif %}
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="first">First name</label>
+                <input class="form-control" id="first" name="contact[first_name]" required>
+                <div class="invalid-feedback">Required.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="last">Last name</label>
+                <input class="form-control" id="last" name="contact[last_name]" required>
+                <div class="invalid-feedback">Required.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="email">Email</label>
+                <input
+                  type="email"
+                  class="form-control{% if form.errors contains 'email' %} is-invalid{% endif %}"
+                  id="email"
+                  name="contact[email]"
+                  required
+                  placeholder="you@sweetmail.com"
+                  value="{{ form.email | escape }}"
+                >
+                <div class="invalid-feedback">Enter a valid email.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="topic">Topic</label>
+                <select id="topic" class="form-select" name="contact[topic]" required>
+                  <option value="">Choose…</option>
+                  <option {% if form.topic == 'Order question' %}selected{% endif %}>Order question</option>
+                  <option {% if form.topic == 'Custom order' %}selected{% endif %}>Custom order</option>
+                  <option {% if form.topic == 'Allergens' %}selected{% endif %}>Allergens</option>
+                  <option {% if form.topic == 'Wholesale' %}selected{% endif %}>Wholesale</option>
+                  <option {% if form.topic == 'Other' %}selected{% endif %}>Other</option>
+                </select>
+                <div class="invalid-feedback">Please choose a topic.</div>
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="msg">Message</label>
+                <textarea
+                  id="msg"
+                  class="form-control{% if form.errors contains 'body' %} is-invalid{% endif %}"
+                  rows="5"
+                  name="contact[body]"
+                  required
+                  placeholder="Tell us how we can help…"
+                >{{ form.body | escape }}</textarea>
+                <div class="invalid-feedback">Please add a message.</div>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="newsletter" name="contact[newsletter]" value="yes">
+                  <label class="form-check-label" for="newsletter">
+                    Sign me up for sweet deals and seasonal drops
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-grid mt-3">
+              <button class="btn btn-dark btn-lg" type="submit">
+                <i class="bi bi-send"></i> Send
+              </button>
+            </div>
+          {% endform %}
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="cardy p-3 p-md-4">
+          <h5 class="mb-3">{{ section.settings.help_heading }}</h5>
+
+          <div class="vstack gap-2 small">
+            {% for block in section.blocks %}
+              {% if block.type == 'support_item' %}
+                <div>
+                  {% if block.settings.icon != blank %}<i class="{{ block.settings.icon }}"></i>{% endif %}
+                  {% if block.settings.title != blank %}<strong>{{ block.settings.title }}</strong>{% endif %}
+                  {% if block.settings.text != blank %} {{ block.settings.text }}{% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          <hr />
+
+          <div class="d-grid gap-2">
+            <a class="btn btn-outline-dark" href="{{ section.settings.faq_url }}">
+              <i class="bi bi-question-circle"></i> {{ section.settings.faq_label }}
+            </a>
+            <a class="btn btn-dark" href="mailto:{{ section.settings.support_email }}">
+              <i class="bi bi-envelope"></i> {{ section.settings.support_label }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Locations / Hours -->
+<section class="pb-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-12">
+        <div class="cardy p-3 p-md-4 h-100">
+          <h5 class="mb-3">Visit a shop</h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="border rounded-4 p-3 h-100">
+                <div
+                  class="d-flex justify-content-between align-items-start"
+                >
+                  <div>
+                    <div class="fw-semibold">Sprinkle Lane</div>
+                    <div class="small text-secondary">
+                      123 Sprinkle Lane, Sweet City
+                    </div>
+                  </div>
+                  <span class="badge text-bg-light">Flagship</span>
+                </div>
+                <div class="small mt-2">
+                  <i class="bi bi-clock"></i> Daily 9am – 7pm
+                </div>
+                <div class="small">
+                  <i class="bi bi-telephone"></i>
+                  (555) 555‑1212
+                </div>
+                <a class="btn btn-outline-dark btn-sm mt-2" href="#"
+                  ><i class="bi bi-geo"></i> Directions</a
+                >
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="border rounded-4 p-3 h-100">
+                <div class="fw-semibold">Berry Boulevard</div>
+                <div class="small text-secondary">
+                  45 Berry Blvd, Sweet City
+                </div>
+                <div class="small mt-2">
+                  <i class="bi bi-clock"></i> Daily 10am – 6pm
+                </div>
+                <div class="small">
+                  <i class="bi bi-telephone"></i>
+                  (555) 555‑8989
+                </div>
+                <a class="btn btn-outline-dark btn-sm mt-2" href="#"
+                  ><i class="bi bi-geo"></i> Directions</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <iframe
+              class="map"
+              title="Map"
+              srcdoc="<style>body,html{margin:0;height:100%;display:grid;place-items:center;background:#eef2ff;color:#0b1220;font-family:Inter,sans-serif}</style><div>Map placeholder</div>"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Help & Support card",
+  "settings": [
+    {
+      "type": "text",
+      "id": "help_heading",
+      "label": "Heading",
+      "default": "Help & Support"
+    },
+    {
+      "type": "url",
+      "id": "faq_url",
+      "label": "FAQ link URL"
+    },
+    {
+      "type": "text",
+      "id": "faq_label",
+      "label": "FAQ button label",
+      "default": "Read FAQs"
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email",
+      "default": "support@cupcakecloud.example"
+    },
+    {
+      "type": "text",
+      "id": "support_label",
+      "label": "Support button label",
+      "default": "Email support"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "support_item",
+      "name": "Support item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon classes (Bootstrap Icons)",
+          "default": "bi bi-shield-check"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Guarantee:"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "If you don’t love it, we’ll make it right."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6
+}
+{% endschema %}

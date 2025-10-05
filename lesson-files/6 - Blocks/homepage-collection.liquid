@@ -1,0 +1,75 @@
+<!-- COLLECTIONS -->
+<section id="collections" class="py-5">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-3">
+      <h2 class="brand fw-black m-0">{{ section.settings.section_title }}</h2>
+      <a class="link-dark" href="{{ section.settings.see_all_link }}">
+        {{ section.settings.see_all_text }} <i class="bi bi-arrow-right-short"></i>
+      </a>
+    </div>
+    <div class="row g-4">
+      {% for block in section.blocks %}
+        {% assign col = block.settings.collection %}
+        {% if col %}
+          <div class="col-12 col-md-6 col-xl-3" {{ block.shopify_attributes }}>
+            <div class="collection-card position-relative h-100">
+              {% if col.image %}
+                <img class="w-100" src="{{ col.image | image_url: width: 800, height: 520, crop: 'center' }}" alt="{{ col.title | escape }}" />
+              {% else %}
+                <img class="w-100" src="//placehold.co/800x520?text={{ col.title | escape }}" alt="{{ col.title | escape }}" />
+              {% endif %}
+              <div class="p-3">
+                <h5 class="mb-1">{{ col.title }}</h5>
+                <p class="small text-secondary mb-2">{{ col.description | strip_html | truncate: 100 }}</p>
+                <!-- Keep the visual button but not a link to avoid nested anchors -->
+                <span class="btn btn-sm btn-outline-dark">Shop now</span>
+              </div>
+              <!-- Make whole card clickable -->
+              <a class="stretched-link" href="{{ col.url }}" aria-label="{{ col.title | escape }}"></a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Homepage Collection",
+  "settings": [
+    {
+      "id": "section_title",
+      "type": "text",
+      "label": "Section Title",
+      "default": "Shop by Collection"
+    },
+    {
+      "id": "see_all_text",
+      "type": "text",
+      "label": "See All Button Text",
+      "default": "See all"
+    },
+    {
+      "id": "see_all_link",
+      "type": "url",
+      "label": "See All Button URL",
+      "default": "/collections/all"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4
+}
+{% endschema %}

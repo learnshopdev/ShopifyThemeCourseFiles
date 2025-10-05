@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "homepage_hero": {
+      "type": "homepage-hero"
+    }
+  },
+  "order": [
+    "homepage_hero"
+  ]
+}

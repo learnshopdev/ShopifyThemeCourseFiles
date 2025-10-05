@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "homepage_hero": {
+      "type": "homepage-hero"
+    },
+    "homepage_collection": {
+      "type": "homepage-collection"
+    },
+    "homepage_product_grid": {
+      "type": "homepage-product-grid"
+    },
+    "homepage_newsletter": {
+      "type": "homepage-newsletter"
+    }
+  },
+  "order": [
+    "homepage_hero",
+    "homepage_collection",
+    "homepage_product_grid",
+    "homepage_newsletter"
+  ]
+}

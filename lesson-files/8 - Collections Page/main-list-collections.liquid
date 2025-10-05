@@ -1,0 +1,79 @@
+<!-- Main — List Collections (blocks) -->
+<header class="py-5">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2">
+        <li class="breadcrumb-item"><a href="{{ routes.root_url }}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Collections</li>
+      </ol>
+    </nav>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+      <div>
+        <h1 class="brand fw-black m-0">{{ section.settings.section_title }}</h1>
+        <p class="text-secondary mb-0">{{ section.settings.section_subtitle }}</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="pb-5">
+  <div class="container">
+    <div class="row g-4" id="grid">
+      {% for block in section.blocks %}
+        {% assign col = block.settings.collection %}
+        {% if col %}
+          <div class="col-12 col-sm-6 col-lg-4 col-xl-3 collection" {{ block.shopify_attributes }}>
+            <a class="text-decoration-none" href="{{ col.url }}">
+              <div class="collection-card h-100">
+                {% if col.image %}
+                  <img class="thumb w-100" src="{{ col.image | image_url: width: 800 }}" alt="{{ col.title | escape }}">
+                {% else %}
+                  <img class="thumb w-100" src="//placehold.co/720x480?text={{ col.title | escape }}" alt="{{ col.title | escape }}">
+                {% endif %}
+                <div class="p-3">
+                  <h5 class="mb-1">{{ col.title }}</h5>
+                  <p class="small text-secondary mb-0">{{ col.description | strip_html | truncate: 120 }}</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</main>
+
+
+{% schema %}
+{
+  "name": "Main List Collections",
+  "settings": [
+    {
+      "id": "section_title",
+      "type": "text",
+      "label": "Title",
+      "default": "Shop by collection"
+    },
+    {
+      "id": "section_subtitle",
+      "type": "text",
+      "label": "Subtitle",
+      "default": "Pick a vibe — we’ll show you the flavors that match."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

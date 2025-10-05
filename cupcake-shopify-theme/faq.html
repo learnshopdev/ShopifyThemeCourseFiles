@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cupcake Cloud — FAQ</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@500;700;900&family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --grape: #7e57c2;
+        --bubble: #f48fb1;
+        --mint: #2dd4bf;
+        --lemon: #fcd34d;
+        --sky: #60a5fa;
+        --ink: #0f172a;
+        --cream: #fffaf6;
+      }
+      body {
+        background: linear-gradient(180deg, #fff 0%, #fff5fb 35%, #f0fbff 100%);
+        color: var(--ink);
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      .brand {
+        font-family: Grandstander, system-ui, sans-serif;
+      }
+      .navbar {
+        backdrop-filter: saturate(130%) blur(6px);
+      }
+      .nav-link {
+        position: relative;
+      }
+      .nav-link:after {
+        content: "";
+        position: absolute;
+        left: 0.6rem;
+        right: 0.6rem;
+        bottom: 0.25rem;
+        height: 3px;
+        background: linear-gradient(90deg, var(--bubble), var(--mint));
+        border-radius: 99px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+      }
+      .nav-link:hover:after,
+      .nav-link.active:after {
+        transform: scaleX(1);
+      }
+
+      .promo {
+        background: linear-gradient(
+          90deg,
+          var(--bubble),
+          var(--sky),
+          var(--mint)
+        );
+        color: #0b2a2d;
+      }
+      .cardy {
+        border: 0;
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      }
+      .pill {
+        border-radius: 999px;
+        font-weight: 600;
+      }
+      .list-check li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer {
+        background: #0b1220;
+        color: #cbd5e1;
+      }
+      .footer a {
+        color: #fbcfe8;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Promo -->
+    <div class="promo py-2 text-center small">
+      <div class="container">
+        <i class="bi bi-question-circle"></i> Can’t find an answer?
+        <a class="link-dark fw-semibold" href="/contact.html">Contact us</a>.
+      </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-white sticky-top border-bottom py-3">
+      <div class="container">
+        <a
+          class="navbar-brand brand d-flex align-items-center"
+          href="index.html"
+        >
+          <span class="me-2" aria-hidden="true">
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 64 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="32" cy="20" r="10" fill="url(#g1)" />
+              <path
+                d="M10 34h44l-6 18a4 4 0 0 1-3.8 2.7H19.8A4 4 0 0 1 16 52l-6-18Z"
+                fill="url(#g2)"
+              />
+              <defs>
+                <linearGradient
+                  id="g1"
+                  x1="22"
+                  y1="10"
+                  x2="42"
+                  y2="30"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#F48FB1" />
+                  <stop offset="1" stop-color="#60A5FA" />
+                </linearGradient>
+                <linearGradient
+                  id="g2"
+                  x1="10"
+                  y1="34"
+                  x2="54"
+                  y2="52"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FCD34D" />
+                  <stop offset="1" stop-color="#2DD4BF" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <span class="fs-3">Cupcake Cloud</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#nav"
+          aria-controls="nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="collections.html">Collections</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="all-products.html">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#flavorModal"
+              >
+                Flavor of the Week
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+          <div class="d-flex ms-lg-3 gap-2">
+            <a href="cart.html" class="btn btn-outline-dark">
+              <i class="bi bi-bag"></i> Cart
+              <span class="badge text-bg-danger ms-1" id="cartCount">0</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="py-5">
+      <div class="container">
+        <div class="row g-3 align-items-end">
+          <div class="col-lg-7">
+            <h1 class="brand fw-black mb-2">Frequently Asked Questions</h1>
+            <p class="lead">
+              Short and sweet answers to our most common questions.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mt-2">
+              <button
+                class="btn btn-outline-dark btn-sm pill cat"
+                data-cat="orders"
+              >
+                Orders
+              </button>
+              <button
+                class="btn btn-outline-dark btn-sm pill cat"
+                data-cat="shipping"
+              >
+                Shipping
+              </button>
+              <button
+                class="btn btn-outline-dark btn-sm pill cat"
+                data-cat="allergens"
+              >
+                Allergens
+              </button>
+              <button
+                class="btn btn-outline-dark btn-sm pill cat"
+                data-cat="storage"
+              >
+                Storage
+              </button>
+              <button
+                class="btn btn-outline-dark btn-sm pill cat"
+                data-cat="gifting"
+              >
+                Gifting
+              </button>
+              <button
+                class="btn btn-outline-dark btn-sm pill cat"
+                data-cat="other"
+              >
+                Other
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="input-group input-group-lg">
+              <span class="input-group-text bg-white"
+                ><i class="bi bi-search"></i
+              ></span>
+              <input
+                class="form-control"
+                id="search"
+                placeholder="Search FAQs (e.g. gluten, delivery, shelf life)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- FAQ -->
+    <main class="pb-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="cardy p-3 p-md-4">
+              <div class="small text-secondary mb-2">
+                <span id="count">0</span> answers
+              </div>
+              <div class="accordion" id="faq">
+                <!-- Item template blocks -->
+                <div
+                  class="accordion-item"
+                  data-cat="orders"
+                  data-tags="order change cancel edit"
+                >
+                  <h2 class="accordion-header" id="q1">
+                    <button
+                      class="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#a1"
+                      aria-expanded="true"
+                      aria-controls="a1"
+                    >
+                      Can I change or cancel my order?
+                    </button>
+                  </h2>
+                  <div
+                    id="a1"
+                    class="accordion-collapse collapse show"
+                    aria-labelledby="q1"
+                    data-bs-parent="#faq"
+                  >
+                    <div class="accordion-body">
+                      Yes — reply to your confirmation email or
+                      <a href="/contact.html">contact us</a>
+                      within 2 hours of placing your order and we’ll do our
+                      best. Custom orders may be locked sooner.
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="accordion-item"
+                  data-cat="shipping"
+                  data-tags="shipping delivery time window schedule local pickup"
+                >
+                  <h2 class="accordion-header" id="q2">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#a2"
+                      aria-expanded="false"
+                      aria-controls="a2"
+                    >
+                      Do you offer delivery or shipping?
+                    </button>
+                  </h2>
+                  <div
+                    id="a2"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="q2"
+                    data-bs-parent="#faq"
+                  >
+                    <div class="accordion-body">
+                      We offer <strong>pickup</strong> at our shops,
+                      <strong>local delivery</strong> in Sweet City, and
+                      <strong>shipping</strong> to most US states. Delivery
+                      windows appear at checkout based on your address.
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="accordion-item"
+                  data-cat="allergens"
+                  data-tags="vegan gluten free nut allergy sesame dairy"
+                >
+                  <h2 class="accordion-header" id="q3">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#a3"
+                      aria-expanded="false"
+                      aria-controls="a3"
+                    >
+                      Do you have vegan, gluten‑free, or nut‑free options?
+                    </button>
+                  </h2>
+                  <div
+                    id="a3"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="q3"
+                    data-bs-parent="#faq"
+                  >
+                    <div class="accordion-body">
+                      Yes! Look for badges on product cards. We take
+                      cross‑contact seriously, but our bakery handles wheat,
+                      dairy, eggs, soy, and nuts. Check the
+                      <a href="#allergen-table">allergen table</a>
+                      below and
+                      <a href="/contact.html">reach out</a>
+                      with any concerns.
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="accordion-item"
+                  data-cat="storage"
+                  data-tags="storage shelf life freeze refrigerate warm serve"
+                >
+                  <h2 class="accordion-header" id="q4">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#a4"
+                      aria-expanded="false"
+                      aria-controls="a4"
+                    >
+                      How do I store cupcakes? How long do they last?
+                    </button>
+                  </h2>
+                  <div
+                    id="a4"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="q4"
+                    data-bs-parent="#faq"
+                  >
+                    <div class="accordion-body">
+                      Best enjoyed same day. Otherwise, keep airtight at room
+                      temp for 1–2 days. To freeze, wrap individually and freeze
+                      up to 1 month; thaw 1 hour at room temp.
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="accordion-item"
+                  data-cat="gifting"
+                  data-tags="gift note wrap message corporate bulk"
+                >
+                  <h2 class="accordion-header" id="q5">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#a5"
+                      aria-expanded="false"
+                      aria-controls="a5"
+                    >
+                      Can you add a gift note or do corporate gifts?
+                    </button>
+                  </h2>
+                  <div
+                    id="a5"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="q5"
+                    data-bs-parent="#faq"
+                  >
+                    <div class="accordion-body">
+                      Absolutely! Add a gift note in cart/checkout. For bulk
+                      gifting,
+                      <a href="/contact.html">contact us</a>
+                      — we’ll coordinate flavors, schedule, and addresses.
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="accordion-item"
+                  data-cat="orders"
+                  data-tags="refund replace guarantee quality issue"
+                >
+                  <h2 class="accordion-header" id="q6">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#a6"
+                      aria-expanded="false"
+                      aria-controls="a6"
+                    >
+                      What if something’s wrong with my order?
+                    </button>
+                  </h2>
+                  <div
+                    id="a6"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="q6"
+                    data-bs-parent="#faq"
+                  >
+                    <div class="accordion-body">
+                      We stand by our
+                      <strong>Sprinkle‑Happy Guarantee</strong>. If you don’t
+                      love it, we’ll make it right — replacements or refunds
+                      when appropriate.
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="accordion-item"
+                  data-cat="shipping"
+                  data-tags="fees free shipping threshold cost"
+                >
+                  <h2 class="accordion-header" id="q7">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#a7"
+                      aria-expanded="false"
+                      aria-controls="a7"
+                    >
+                      How much is shipping?
+                    </button>
+                  </h2>
+                  <div
+                    id="a7"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="q7"
+                    data-bs-parent="#faq"
+                  >
+                    <div class="accordion-body">
+                      Local delivery starts at $4.95. Standard shipping is
+                      $9.95. Orders
+                      <strong>$35+</strong> ship free where available.
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="accordion-item"
+                  data-cat="other"
+                  data-tags="catering wedding events custom tasting"
+                >
+                  <h2 class="accordion-header" id="q8">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#a8"
+                      aria-expanded="false"
+                      aria-controls="a8"
+                    >
+                      Do you cater weddings or events?
+                    </button>
+                  </h2>
+                  <div
+                    id="a8"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="q8"
+                    data-bs-parent="#faq"
+                  >
+                    <div class="accordion-body">
+                      We do! From mini assortments to custom towers. Send
+                      details (date, guest count, vibe) via our
+                      <a href="/contact.html">contact form</a>
+                      and our events team will reply.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Allergen table -->
+            <div class="cardy p-3 p-md-4 mt-3" id="allergen-table">
+              <h5 class="mb-3">Common allergens</h5>
+              <div class="table-responsive">
+                <table class="table align-middle">
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th>Contains</th>
+                      <th>Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Classic</td>
+                      <td>Wheat, dairy, eggs</td>
+                      <td>Nut‑free options available</td>
+                    </tr>
+                    <tr>
+                      <td>Fruity</td>
+                      <td>Wheat, dairy, eggs</td>
+                      <td>Some flavors GF</td>
+                    </tr>
+                    <tr>
+                      <td>Chocolate</td>
+                      <td>Wheat, dairy, eggs, soy</td>
+                      <td>Contains cocoa</td>
+                    </tr>
+                    <tr>
+                      <td>Specialty (vegan)</td>
+                      <td>May contain soy</td>
+                      <td>Dairy/egg free</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="small text-secondary mb-0">
+                We handle wheat, dairy, eggs, soy, and nuts in our facility. We
+                take cross‑contact seriously but cannot guarantee 100%
+                allergen‑free.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <aside class="cardy p-3 p-md-4">
+              <h6 class="mb-3">Can’t find what you need?</h6>
+              <p class="small">Send us a message and we’ll help you out.</p>
+              <a class="btn btn-dark w-100" href="/contact.html"
+                ><i class="bi bi-envelope"></i> Contact support</a
+              >
+              <hr />
+              <h6 class="mb-2">Quick links</h6>
+              <ul class="list-unstyled small list-check">
+                <li><a href="cart.html">View your cart</a></li>
+                <li>
+                  <a href="all-products.html">Browse all cupcakes</a>
+                </li>
+                <li>
+                  <a href="collections.html">Shop collections</a>
+                </li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer pt-5 pb-4 mt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="brand fs-3 mb-2">Cupcake Cloud</div>
+            <p class="text-light">
+              Small‑batch bakery crafting colorful cupcakes since 2012.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" aria-label="Instagram"
+                ><i class="bi bi-instagram fs-4"></i
+              ></a>
+              <a href="#" aria-label="TikTok"
+                ><i class="bi bi-tiktok fs-4"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="bi bi-facebook fs-4"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <h6 class="text-uppercase text-secondary">Shop</h6>
+            <ul class="list-unstyled small">
+              <li>
+                <a href="all-products.html">All Cupcakes</a>
+              </li>
+              <li><a href="collections.html">Collections</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-2">
+            <h6 class="text-uppercase text-secondary">Help</h6>
+            <ul class="list-unstyled small">
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6 class="text-uppercase text-secondary">Guarantee</h6>
+            <p class="small">
+              If you don’t love it, we’ll make it right. That’s our
+              Sprinkle‑Happy Guarantee.
+            </p>
+          </div>
+        </div>
+        <hr class="border-secondary border-opacity-25 my-4" />
+        <div
+          class="d-flex flex-wrap justify-content-between small text-secondary"
+        >
+          <span>© <span id="year"></span> Cupcake Cloud</span>
+          <div class="d-flex gap-3">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const search = document.getElementById("search");
+      const items = [...document.querySelectorAll("#faq .accordion-item")];
+      const count = document.getElementById("count");
+      const cats = document.querySelectorAll(".cat");
+      let currentCat = "";
+
+      cats.forEach((btn) =>
+        btn.addEventListener("click", () => {
+          cats.forEach((b) => b.classList.remove("btn-dark"));
+          btn.classList.add("btn-dark");
+          currentCat = btn.dataset.cat;
+          applyFilters(true);
+        }),
+      );
+
+      search.addEventListener("input", () => applyFilters());
+
+      function applyFilters(scroll) {
+        const q = search.value.trim().toLowerCase();
+        let visible = 0;
+        items.forEach((it) => {
+          const catOk = !currentCat || it.dataset.cat === currentCat;
+          const text =
+            (it.textContent || "").toLowerCase() +
+            " " +
+            (it.dataset.tags || "");
+          const show = catOk && (!q || text.includes(q));
+          it.classList.toggle("d-none", !show);
+          if (show) visible++;
+        });
+        count.textContent = visible;
+        if (scroll)
+          document
+            .getElementById("faq")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      // default select first category on load (optional)
+      // document.querySelector('.cat[data-cat="orders"]').click();
+      applyFilters();
+    </script>
+  </body>
+</html>

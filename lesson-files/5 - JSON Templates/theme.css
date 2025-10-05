@@ -1,0 +1,175 @@
+:root {
+  --grape: #7e57c2;
+  --bubble: #f48fb1;
+  --mint: #2dd4bf;
+  --lemon: #fcd34d;
+  --sky: #60a5fa;
+  --ink: #0f172a;
+  --cream: #fffaf6;
+}
+body {
+  background: linear-gradient(180deg, #fff 0%, #fff5fb 35%, #f0fbff 100%);
+  color: var(--ink);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+.brand {
+  font-family: Grandstander, system-ui, sans-serif;
+}
+
+/* NAV */
+.navbar {
+  backdrop-filter: saturate(130%) blur(6px);
+}
+.nav-link {
+  position: relative;
+}
+.nav-link:after {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  bottom: 0.25rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--bubble), var(--mint));
+  border-radius: 99px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-link:hover:after,
+.nav-link.active:after {
+  transform: scaleX(1);
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      800px 300px at 10% -20%,
+      rgba(244, 143, 177, 0.35) 0,
+      transparent 60%
+    ),
+    radial-gradient(
+      800px 300px at 110% 10%,
+      rgba(96, 165, 250, 0.35) 0,
+      transparent 60%
+    ),
+    linear-gradient(135deg, #fff 0%, #fffaf6 60%, #f0fbff 100%);
+}
+.hero-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+}
+.badge-candy {
+  background: linear-gradient(90deg, var(--grape), var(--bubble));
+}
+.hero-card {
+  background: #fff;
+  border: 0;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* COLLECTIONS */
+.collection-card {
+  border: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  color: #0f172a;
+  background: #fff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.collection-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.12);
+}
+.ribbon {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: linear-gradient(90deg, var(--lemon), var(--mint));
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+/* PRODUCT GRID */
+.card-product {
+  border: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+.card-product .thumb {
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+.pill {
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* BANNER */
+.promo {
+  background: linear-gradient(
+    90deg,
+    var(--bubble),
+    var(--sky),
+    var(--mint)
+  );
+  color: #0b2a2d;
+}
+
+/* COUNTDOWN */
+.countdown {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.5px;
+}
+
+/* FOOTER */
+.footer {
+  background: #0b1220;
+  color: #cbd5e1;
+}
+.footer a {
+  color: #fbcfe8;
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.floating-cart {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  border: 0;
+  border-radius: 50%;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, var(--grape), var(--bubble));
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(126, 87, 194, 0.5);
+}
+
+.hero-gradient-text {
+  background: linear-gradient(90deg, var(--bubble), var(--mint));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

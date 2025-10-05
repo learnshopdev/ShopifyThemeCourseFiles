@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cupcake Cloud — Privacy Policy</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@500;700;900&family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --grape: #7e57c2;
+        --bubble: #f48fb1;
+        --mint: #2dd4bf;
+        --lemon: #fcd34d;
+        --sky: #60a5fa;
+        --ink: #0f172a;
+        --cream: #fffaf6;
+      }
+      body {
+        background: linear-gradient(180deg, #fff 0%, #fff5fb 35%, #f0fbff 100%);
+        color: var(--ink);
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      .brand {
+        font-family: Grandstander, system-ui, sans-serif;
+      }
+      .navbar {
+        backdrop-filter: saturate(130%) blur(6px);
+      }
+      .nav-link {
+        position: relative;
+      }
+      .nav-link:after {
+        content: "";
+        position: absolute;
+        left: 0.6rem;
+        right: 0.6rem;
+        bottom: 0.25rem;
+        height: 3px;
+        background: linear-gradient(90deg, var(--bubble), var(--mint));
+        border-radius: 99px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+      }
+      .nav-link:hover:after,
+      .nav-link.active:after {
+        transform: scaleX(1);
+      }
+
+      .promo {
+        background: linear-gradient(
+          90deg,
+          var(--bubble),
+          var(--sky),
+          var(--mint)
+        );
+        color: #0b2a2d;
+      }
+      .hero {
+        background:
+          radial-gradient(
+            800px 300px at 10% -20%,
+            rgba(244, 143, 177, 0.35) 0,
+            transparent 60%
+          ),
+          radial-gradient(
+            800px 300px at 110% 10%,
+            rgba(96, 165, 250, 0.35) 0,
+            transparent 60%
+          ),
+          linear-gradient(135deg, #fff 0%, #fffaf6 60%, #f0fbff 100%);
+      }
+      .cardy {
+        border: 0;
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      }
+      .pill {
+        border-radius: 999px;
+        font-weight: 600;
+      }
+      .toc {
+        position: sticky;
+        top: 88px;
+      }
+
+      .footer {
+        background: #0b1220;
+        color: #cbd5e1;
+      }
+      .footer a {
+        color: #fbcfe8;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Promo -->
+    <div class="promo py-2 text-center small">
+      <div class="container">
+        <i class="bi bi-shield-lock"></i> Your privacy matters. Read how we
+        protect it below.
+      </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-white sticky-top border-bottom py-3">
+      <div class="container">
+        <a
+          class="navbar-brand brand d-flex align-items-center"
+          href="index.html"
+        >
+          <span class="me-2" aria-hidden="true">
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 64 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="32" cy="20" r="10" fill="url(#g1)" />
+              <path
+                d="M10 34h44l-6 18a4 4 0 0 1-3.8 2.7H19.8A4 4 0 0 1 16 52l-6-18Z"
+                fill="url(#g2)"
+              />
+              <defs>
+                <linearGradient
+                  id="g1"
+                  x1="22"
+                  y1="10"
+                  x2="42"
+                  y2="30"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#F48FB1" />
+                  <stop offset="1" stop-color="#60A5FA" />
+                </linearGradient>
+                <linearGradient
+                  id="g2"
+                  x1="10"
+                  y1="34"
+                  x2="54"
+                  y2="52"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FCD34D" />
+                  <stop offset="1" stop-color="#2DD4BF" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <span class="fs-3">Cupcake Cloud</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#nav"
+          aria-controls="nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="collections.html">Collections</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="all-products.html">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#flavorModal"
+              >
+                Flavor of the Week
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+          <div class="d-flex ms-lg-3 gap-2">
+            <a href="cart.html" class="btn btn-outline-dark">
+              <i class="bi bi-bag"></i> Cart
+              <span class="badge text-bg-danger ms-1" id="cartCount">0</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="hero py-5 border-bottom">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <span
+              class="badge pill"
+              style="
+                background: linear-gradient(90deg, var(--grape), var(--bubble));
+                color: #fff;
+              "
+              >Privacy</span
+            >
+            <h1 class="brand fw-black mt-3">Privacy Policy</h1>
+            <p class="lead">
+              This Privacy Policy explains how Cupcake Cloud ("we", "us", "our")
+              collects, uses, and shares your information when you visit our
+              website, make a purchase, or interact with us.
+            </p>
+            <div class="small text-secondary">
+              Last updated:
+              <time datetime="2025-01-01">January 1, 2025</time>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="cardy p-3 p-md-4">
+              <h6 class="mb-2">Questions?</h6>
+              <p class="small text-secondary mb-2">
+                We’re happy to help with privacy requests or questions.
+              </p>
+              <div class="d-grid gap-2">
+                <a
+                  class="btn btn-dark"
+                  href="mailto:privacy@cupcakecloud.example"
+                  ><i class="bi bi-envelope"></i>
+                  privacy@cupcakecloud.example</a
+                >
+                <a class="btn btn-outline-dark" href="/contact.html"
+                  ><i class="bi bi-chat"></i> Contact form</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="py-5">
+      <div class="container">
+        <div class="row g-4">
+          <!-- TOC -->
+          <aside class="col-lg-3 order-lg-2">
+            <div class="cardy p-3 toc">
+              <h6 class="mb-2">On this page</h6>
+              <nav class="small vstack gap-1">
+                <a class="link-dark" href="#collect">Information we collect</a>
+                <a class="link-dark" href="#sources">Sources</a>
+                <a class="link-dark" href="#use">How we use information</a>
+                <a class="link-dark" href="#sharing">Sharing & disclosures</a>
+                <a class="link-dark" href="#cookies">Cookies & tracking</a>
+                <a class="link-dark" href="#ads">Analytics & ads</a>
+                <a class="link-dark" href="#rights">Your privacy rights</a>
+                <a class="link-dark" href="#security">Security</a>
+                <a class="link-dark" href="#retention">Data retention</a>
+                <a class="link-dark" href="#children">Children</a>
+                <a class="link-dark" href="#transfers"
+                  >International transfers</a
+                >
+                <a class="link-dark" href="#changes">Changes to this policy</a>
+                <a class="link-dark" href="#contact">Contact us</a>
+              </nav>
+            </div>
+          </aside>
+
+          <!-- Content -->
+          <section class="col-lg-9 order-lg-1">
+            <div class="vstack gap-4">
+              <div id="collect" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">Information we collect</h3>
+                <div class="row g-3 small text-secondary">
+                  <div class="col-md-6">
+                    <div class="p-3 border rounded-4 h-100">
+                      <div class="fw-semibold mb-1">
+                        Information you provide
+                      </div>
+                      <ul class="mb-0 vstack gap-1">
+                        <li>
+                          Account and contact details (name, email, phone,
+                          address)
+                        </li>
+                        <li>
+                          Order details and payment information (processed
+                          securely by our payment processor)
+                        </li>
+                        <li>
+                          Messages to support, reviews, and survey responses
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="p-3 border rounded-4 h-100">
+                      <div class="fw-semibold mb-1">
+                        Information collected automatically
+                      </div>
+                      <ul class="mb-0 vstack gap-1">
+                        <li>
+                          Device and usage data (IP address, browser type, pages
+                          viewed, timestamps)
+                        </li>
+                        <li>
+                          Cookies, pixels, and similar technologies (see
+                          <a href="#cookies">Cookies</a>)
+                        </li>
+                        <li>Approximate location derived from IP</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="sources" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">Sources</h3>
+                <p class="small text-secondary mb-0">
+                  We collect information directly from you, automatically
+                  through your use of our site, and from third parties (e.g.,
+                  payment processors, shipping providers, advertising and
+                  analytics partners) consistent with your settings and their
+                  policies.
+                </p>
+              </div>
+
+              <div id="use" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">How we use information</h3>
+                <ul class="small text-secondary vstack gap-2 mb-0">
+                  <li>
+                    Provide, personalize, and improve our products and services
+                  </li>
+                  <li>
+                    Process orders, payments, shipments, and customer support
+                  </li>
+                  <li>
+                    Send transactional messages (receipts, shipping updates)
+                  </li>
+                  <li>
+                    Send marketing communications (with your consent where
+                    required)
+                  </li>
+                  <li>
+                    Prevent fraud, secure our services, and comply with legal
+                    obligations
+                  </li>
+                </ul>
+              </div>
+
+              <div id="sharing" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">Sharing & disclosures</h3>
+                <p class="small text-secondary">
+                  We do not sell your personal information. We share information
+                  with:
+                </p>
+                <ul class="small text-secondary vstack gap-2 mb-0">
+                  <li>
+                    <strong>Service providers</strong>
+                    (payment processing, fulfillment, hosting, analytics,
+                    customer support)
+                  </li>
+                  <li>
+                    <strong>Business transfers</strong> in connection with
+                    mergers, acquisitions, or asset sales
+                  </li>
+                  <li>
+                    <strong>Legal and safety</strong> when required by law or to
+                    protect rights, safety, and property
+                  </li>
+                </ul>
+              </div>
+
+              <div id="cookies" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">Cookies & tracking</h3>
+                <p class="small text-secondary">
+                  We use cookies and similar technologies to remember your
+                  preferences, keep your cart, and understand how people use our
+                  site. You can control cookies via your browser settings. Some
+                  features may not work without certain cookies.
+                </p>
+              </div>
+
+              <div id="ads" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">Analytics & advertising</h3>
+                <ul class="small text-secondary vstack gap-2 mb-0">
+                  <li>
+                    We use analytics tools to understand website performance and
+                    improve the experience.
+                  </li>
+                  <li>
+                    We may work with advertising partners to show relevant
+                    offers. You can opt out of interest‑based advertising via
+                    your browser/device settings or industry opt‑out pages.
+                  </li>
+                </ul>
+              </div>
+
+              <div id="rights" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">Your privacy rights</h3>
+                <p class="small text-secondary">
+                  Depending on your location, you may have rights to access,
+                  correct, delete, or restrict use of your personal information,
+                  opt out of certain processing, and receive a copy of your
+                  data.
+                </p>
+                <div class="row g-3 small text-secondary">
+                  <div class="col-md-6">
+                    <div class="p-3 border rounded-4 h-100">
+                      <div class="fw-semibold mb-1">
+                        How to exercise your rights
+                      </div>
+                      <ul class="mb-0 vstack gap-1">
+                        <li>
+                          Email us at
+                          <a href="mailto:privacy@cupcakecloud.example"
+                            >privacy@cupcakecloud.example</a
+                          >
+                        </li>
+                        <li>
+                          Use our
+                          <a href="/contact.html">contact form</a>
+                        </li>
+                        <li>Adjust cookie preferences in your browser</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="p-3 border rounded-4 h-100">
+                      <div class="fw-semibold mb-1">
+                        Jurisdiction‑specific notices
+                      </div>
+                      <ul class="mb-0 vstack gap-1">
+                        <li>
+                          <strong>EEA/UK/Swiss:</strong>
+                          Lawful bases include contract, legitimate interests,
+                          consent (where required)
+                        </li>
+                        <li>
+                          <strong>US (state laws):</strong>
+                          You may have additional rights (access, delete,
+                          correct, opt out of targeted ads). We do not sell
+                          personal data.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="security" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">Security</h3>
+                <p class="small text-secondary mb-0">
+                  We use administrative, technical, and physical safeguards
+                  appropriate to the nature of the information we process. No
+                  method of transmission or storage is 100% secure.
+                </p>
+              </div>
+
+              <div id="retention" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">Data retention</h3>
+                <p class="small text-secondary mb-0">
+                  We keep information for as long as necessary to provide
+                  services, comply with our legal obligations, resolve disputes,
+                  and enforce our agreements.
+                </p>
+              </div>
+
+              <div id="children" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">Children’s privacy</h3>
+                <p class="small text-secondary mb-0">
+                  Our website is not directed to children under 13, and we do
+                  not knowingly collect personal information from children.
+                </p>
+              </div>
+
+              <div id="transfers" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">International transfers</h3>
+                <p class="small text-secondary mb-0">
+                  If you access our services from outside the country where our
+                  servers are located, your information may be transferred,
+                  stored, and processed in that country. We take steps to ensure
+                  appropriate protections are in place.
+                </p>
+              </div>
+
+              <div id="changes" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">Changes to this policy</h3>
+                <p class="small text-secondary mb-0">
+                  We may update this Privacy Policy from time to time. We will
+                  post the new effective date at the top and, if changes are
+                  material, provide additional notice.
+                </p>
+              </div>
+
+              <div id="contact" class="cardy p-3 p-md-4">
+                <h3 class="brand fw-black h4">Contact us</h3>
+                <p class="small text-secondary">
+                  Have a privacy question or request?
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                  <a
+                    class="btn btn-dark"
+                    href="mailto:privacy@cupcakecloud.example"
+                    ><i class="bi bi-envelope"></i> Email privacy</a
+                  >
+                  <a class="btn btn-outline-dark" href="/contact.html"
+                    ><i class="bi bi-chat"></i> Contact form</a
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer pt-5 pb-4 mt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="brand fs-3 mb-2">Cupcake Cloud</div>
+            <p class="text-light">
+              Small‑batch bakery crafting colorful cupcakes since 2012.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" aria-label="Instagram"
+                ><i class="bi bi-instagram fs-4"></i
+              ></a>
+              <a href="#" aria-label="TikTok"
+                ><i class="bi bi-tiktok fs-4"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="bi bi-facebook fs-4"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <h6 class="text-uppercase text-secondary">Shop</h6>
+            <ul class="list-unstyled small">
+              <li>
+                <a href="all-products.html">All Cupcakes</a>
+              </li>
+              <li><a href="collections.html">Collections</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-2">
+            <h6 class="text-uppercase text-secondary">Help</h6>
+            <ul class="list-unstyled small">
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6 class="text-uppercase text-secondary">Guarantee</h6>
+            <p class="small">
+              If you don’t love it, we’ll make it right. That’s our
+              Sprinkle‑Happy Guarantee.
+            </p>
+          </div>
+        </div>
+        <hr class="border-secondary border-opacity-25 my-4" />
+        <div
+          class="d-flex flex-wrap justify-content-between small text-secondary"
+        >
+          <span>© <span id="year"></span> Cupcake Cloud</span>
+          <div class="d-flex gap-3">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

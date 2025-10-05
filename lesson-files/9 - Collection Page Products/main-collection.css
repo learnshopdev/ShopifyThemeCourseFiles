@@ -1,0 +1,148 @@
+:root {
+  --grape: #7e57c2;
+  --bubble: #f48fb1;
+  --mint: #2dd4bf;
+  --lemon: #fcd34d;
+  --sky: #60a5fa;
+  --ink: #0f172a;
+  --cream: #fffaf6;
+}
+body {
+  background: linear-gradient(180deg, #fff 0%, #fff5fb 35%, #f0fbff 100%);
+  color: var(--ink);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+.brand {
+  font-family: Grandstander, system-ui, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  backdrop-filter: saturate(130%) blur(6px);
+}
+.nav-link {
+  position: relative;
+}
+.nav-link:after {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  bottom: 0.25rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--bubble), var(--mint));
+  border-radius: 99px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-link:hover:after,
+.nav-link.active:after {
+  transform: scaleX(1);
+}
+
+/* Page */
+.page-hero {
+  background:
+    radial-gradient(
+      600px 200px at 10% -20%,
+      rgba(244, 143, 177, 0.35) 0,
+      transparent 60%
+    ),
+    radial-gradient(
+      600px 200px at 110% 10%,
+      rgba(96, 165, 250, 0.35) 0,
+      transparent 60%
+    ),
+    linear-gradient(135deg, #fff 0%, #fffaf6 60%, #f0fbff 100%);
+}
+.pill {
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* Filters */
+.filter-card {
+  border: 0;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+.sticky-side {
+  position: sticky;
+  top: 88px;
+}
+.active-chip {
+  border-radius: 999px;
+  background: #0f172a;
+  color: #fff;
+  padding: 0.35rem 0.7rem;
+}
+.active-chip button {
+  border: 0;
+  background: transparent;
+  color: #fff;
+}
+
+/* Product */
+.card-product {
+  border: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+.card-product:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+}
+.thumb {
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.badge-new {
+  background: linear-gradient(90deg, var(--lemon), var(--mint));
+  color: #0b2a2d;
+}
+.badge-top {
+  background: linear-gradient(90deg, var(--grape), var(--bubble));
+}
+.wishlist {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.footer {
+  background: #0b1220;
+  color: #cbd5e1;
+}
+.footer a {
+  color: #fbcfe8;
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.promo {
+  background: linear-gradient(
+    90deg,
+    var(--bubble),
+    var(--sky),
+    var(--mint)
+  );
+  color: #0b2a2d;
+}
